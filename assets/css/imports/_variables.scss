@@ -1,0 +1,29 @@
+// colors
+
+$one:#293241;
+$two:#3D5A80;
+$three:#98C1D9;
+$four:#E0FBFC;
+$five:#EE6C4D;
+
+$theme-colors: (
+    "one":$one,
+    "two":$two,
+    "three":$three,
+    "four":$four,
+    "five":$five
+);
+
+// type color classes
+@each $name, $color in $theme-colors {
+    .text-#{$name}{
+        color: $color;
+    }
+    .bg-#{$name}{
+        background-color: $color;
+    }
+}
+
+// transitions
+
+$transition-base: cubic-bezier(.49,-0.32,.25,1.23);

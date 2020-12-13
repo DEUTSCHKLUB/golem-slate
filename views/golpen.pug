@@ -1,0 +1,41 @@
+extends layout
+
+block append head
+    link(rel='stylesheet' href="/editor/lib/codemirror.css" type='text/css')
+
+block content
+    #golpen-ui-wrap
+        #golpen-container
+            #golpen-nav
+                .logo
+                    | ::GOLPEN_ | A New Pen | CPUs: _____ MEMs: _____ DISK: ____ IMAGE: ______________
+            #golpen-filelist.ui-col
+                #filelist
+                    include partials/filelist.html
+            #golpen-editor.ui-col
+                #editor-container
+            #golpen-output.ui-col
+                #console-container
+
+block append footer
+    script(src="/javascripts/golpen-ui.js")
+    script(src="/editor/lib/codemirror.js")
+    script(src="/editor/mode/javascript/javascript.js")
+    script.
+        (function(w,d){
+            const editor = CodeMirror(d.querySelector('#editor-container'), {
+                value: `function golpen(){ return "Golpen is Awesome"; }\n`,
+                mode: {name: "javascript", json: true},
+                lineNumbers: true,
+                lineWrapping: true,
+                theme: "golpen"
+            }),
+            bashconsole = CodeMirror(d.querySelector('#console-container'), {
+                value: `Output here...
+                
+                Bacon ipsum dolor amet meatball chuck sausage, ham hock cow cupim ball tip picanha drumstick pork beef bresaola burgdoggen fatback kevin. Bacon fatback ham shoulder tongue, biltong leberkas tail ham hock jowl pork loin buffalo kevin. Chislic salami tri-tip cow shankle kielbasa tongue. Bacon tri-tip doner chislic. Jowl doner capicola filet mignon corned beef swine picanha pork loin landjaeger chislic tongue.`,
+                mode: {name: "javascript", json: true},
+                lineWrapping: true,
+                theme: "golpen-console"
+            });
+        })(window,document);
