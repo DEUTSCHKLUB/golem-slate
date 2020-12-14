@@ -1,3 +1,5 @@
+$bg-hover-color:lighten($one, 2%);
+$active-file-color:lighten($five, 2%);
 .filelist-wrapper {
     margin: auto;
     width: 100%;
@@ -16,11 +18,11 @@
                 &:checked~ul {
                     height: 100%;
                     transform-origin: top;
-                    transition: transform .5s $transition-base;
+                    // transition: transform .5s $transition-base;
                     transform: scaleY(1);
                 }
                 &:checked+label {
-                    background: lighten($one, 5%);
+                    // background: $bg-hover-color;
                     &:after{
                         content:"-";
                     }
@@ -31,6 +33,7 @@
                 cursor: pointer;
                 padding: 10px;
                 position: relative;
+                border-bottom: 1px solid $two;
                 &:after{
                     content:"+";
                     position: absolute;
@@ -41,7 +44,7 @@
                     line-height:2.4em;
                 }
                 &:hover {
-                    background: lighten($one, 5%);
+                    background: $bg-hover-color;
                 }
             }
 
@@ -49,12 +52,16 @@
                 padding: 5px 20px;
                 position: relative;
                 &:hover {
-                    background: lighten($one, 5%);
+                    // background: $bg-hover-color;
                     color:$four;
                     cursor:pointer;
                 }
                 &.open-in-editor{
-                    background: lighten($one, 5%);
+                    background: $active-file-color;
+                    color:$one;
+                    &:hover {
+                        color:$four;
+                    }
                     &:after{
                         content:">";
                         position: absolute;

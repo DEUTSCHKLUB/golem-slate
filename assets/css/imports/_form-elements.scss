@@ -1,0 +1,194 @@
+/* RESET RULES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+$white: #afafaf;
+$red: $five;
+$bodyColor: $one;
+$borderFormEls: $two;
+$bgFormEls: $bodyColor;
+$bgFormElsFocus: $two;
+
+a {
+  color: inherit;
+}
+
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+  font-size: 100%;
+}
+
+button,
+label {
+  cursor: pointer;
+}
+
+select {
+  appearance: none;
+}
+
+/* Remove native arrow on IE */
+select::-ms-expand {
+  display: none;
+}
+
+/*Remove dotted outline from selected option on Firefox*/
+/*https://stackoverflow.com/questions/3773430/remove-outline-from-select-box-in-ff/18853002#18853002*/
+/*We use !important to override the color set for the select on line 99*/
+select:-moz-focusring {
+  color: transparent !important;
+  text-shadow: 0 0 0 $white;
+}
+
+/* FORM ELEMENTS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.form-control h1 {
+  margin-bottom: 1.5rem;
+}
+
+.form-control li,
+.form-control .grid > *:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+
+.form-control select,
+.form-control input,
+.form-control textarea,
+.form-control button {
+  width: 100%;
+  line-height: 1.5;
+  padding: 15px 10px;
+  border: 1px solid $borderFormEls;
+  color: $white;
+  background: $bgFormEls;
+  transition: background-color 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25),
+    transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
+}
+
+.form-control textarea {
+  height: 170px;
+}
+
+.form-control ::placeholder {
+  color: inherit;
+  /*Fix opacity issue on Firefox*/
+  opacity: 1;
+}
+
+.form-control select:focus,
+.form-control input:focus,
+.form-control textarea:focus,
+.form-control button:enabled:hover,
+.form-control button:focus,
+.form-control input[type="checkbox"]:focus + label {
+  background: $bgFormElsFocus;
+}
+
+.form-control select:focus,
+.form-control input:focus,
+.form-control textarea:focus {
+  transform: scale(1.02);
+}
+
+.form-control *:required,
+.form-control select {
+  background-repeat: no-repeat;
+  background-position: center right 12px;
+  background-size: 15px 15px;
+}
+
+.form-control *:required {
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/asterisk.svg);  
+}
+
+.form-control select {
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/down.svg);
+}
+
+.form-control *:disabled {
+  cursor: default;
+  filter: blur(2px);
+}
+
+
+/* FORM BTNS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.form-control .required-msg {
+  display: none;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/asterisk.svg)
+    no-repeat center left / 15px 15px;
+  padding-left: 20px;
+}
+
+.form-control .btn-grid {
+  position: relative;
+  overflow: hidden;
+  transition: filter 0.2s;
+}
+
+.form-control button > * {
+  display: inline-block;
+  width: 100%;
+  transition: transform 0.4s ease-in-out;
+}
+
+.form-control button .back {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-110%, -50%);
+}
+
+.form-control button:enabled:hover .back,
+.form-control button:focus .back {
+  transform: translate(-50%, -50%);
+}
+
+.form-control button:enabled:hover .front,
+.form-control button:focus .front {
+  transform: translateX(110%);
+}
+
+
+/* CUSTOM CHECKBOX
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.form-control input[type="checkbox"] {
+  position: absolute;
+  left: -9999px;
+}
+
+.form-control input[type="checkbox"] + label {
+  position: relative;
+  display: inline-block;
+  padding-left: 2rem;
+  transition: background 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
+}
+
+.form-control input[type="checkbox"] + label::before,
+.form-control input[type="checkbox"] + label::after {
+  content: '';
+  position: absolute;
+}
+
+.form-control input[type="checkbox"] + label::before {
+  left: 0;
+  top: 6px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid $white;
+}
+
+.form-control input[type="checkbox"]:checked + label::before {
+  background: $red;
+}
+
+.form-control input[type="checkbox"]:checked + label::after {
+  left: 7px;
+  top: 7px;
+  width: 6px;
+  height: 14px;
+  border-bottom: 2px solid $white;
+  border-right: 2px solid $white;
+  transform: rotate(45deg);
+}

@@ -366,16 +366,31 @@ template {
   background-color: #EE6C4D; }
 
 #golpen-ui-wrap {
-  background: #293241;
+  position: relative;
+  background-color: #293241;
+  background-image: linear-gradient(90deg, rgba(31, 38, 49, 0.8), rgba(255, 0, 0, 0) 80%), linear-gradient(180deg, #292f41, rgba(0, 255, 0, 0) 60.71%), linear-gradient(157deg, #ee4d56, rgba(0, 255, 255, 0) 70.71%), linear-gradient(to top, rgba(61, 90, 128, 0.5) 0%, rgba(61, 90, 128, 0.3) 5%, rgba(41, 50, 65, 0) 100%);
+  border-bottom: 10px solid #293241;
   width: 90vw;
   height: auto;
   min-height: 90vh;
+  box-shadow: 0rem 2rem 20px -15px rgba(41, 50, 65, 0.76);
   margin: 5vh auto;
   padding: 1rem 1.5rem;
   border-radius: .7rem; }
   @media (min-width: 992px) {
     #golpen-ui-wrap {
       height: 90vh; } }
+  #golpen-ui-wrap:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2rem;
+    background: linear-gradient(0deg, rgba(152, 193, 217, 0.2) 0%, rgba(61, 90, 128, 0.2) 3%, rgba(41, 50, 65, 0) 100%);
+    mix-blend-mode: screen;
+    border-bottom-left-radius: .7rem;
+    border-bottom-right-radius: .7rem; }
   #golpen-ui-wrap #golpen-container {
     display: flex;
     flex-direction: column;
@@ -404,12 +419,12 @@ template {
     #golpen-ui-wrap #golpen-container #golpen-filelist {
       display: flex;
       flex-direction: column;
-      border-bottom: 1px solid #98C1D9;
+      border-bottom: 1px solid #3D5A80;
       transition: flex 0.8s cubic-bezier(0.49, -0.32, 0.25, 1.23); }
       @media (min-width: 992px) {
         #golpen-ui-wrap #golpen-container #golpen-filelist {
           border-bottom: none;
-          border-right: 1px solid #98C1D9;
+          border-right: 1px solid #3D5A80;
           min-width: 15%;
           max-width: 20%; } }
       #golpen-ui-wrap #golpen-container #golpen-filelist #filelist {
@@ -421,13 +436,13 @@ template {
         width: 100%;
         height: 100%; }
     #golpen-ui-wrap #golpen-container #golpen-output {
-      border-top: 1px solid #98C1D9;
+      border-top: 1px solid #3D5A80;
       transition: flex 0.8s cubic-bezier(0.49, -0.32, 0.25, 1.23);
       min-height: 50vh; }
       @media (min-width: 992px) {
         #golpen-ui-wrap #golpen-container #golpen-output {
           border-top: none;
-          border-left: 1px solid #98C1D9;
+          border-left: 1px solid #3D5A80;
           min-width: 25%;
           max-width: 25%; } }
 
@@ -447,17 +462,15 @@ template {
       .filelist-wrapper ul li input[type="checkbox"]:checked ~ ul {
         height: 100%;
         transform-origin: top;
-        transition: transform 0.5s cubic-bezier(0.49, -0.32, 0.25, 1.23);
         transform: scaleY(1); }
-      .filelist-wrapper ul li input[type="checkbox"]:checked + label {
-        background: #333e51; }
-        .filelist-wrapper ul li input[type="checkbox"]:checked + label:after {
-          content: "-"; }
+      .filelist-wrapper ul li input[type="checkbox"]:checked + label:after {
+        content: "-"; }
     .filelist-wrapper ul li label {
       display: block;
       cursor: pointer;
       padding: 10px;
-      position: relative; }
+      position: relative;
+      border-bottom: 1px solid #3D5A80; }
       .filelist-wrapper ul li label:after {
         content: "+";
         position: absolute;
@@ -467,16 +480,18 @@ template {
         font-size: 1.2rem;
         line-height: 2.4em; }
       .filelist-wrapper ul li label:hover {
-        background: #333e51; }
+        background: #2d3747; }
     .filelist-wrapper ul li ul li {
       padding: 5px 20px;
       position: relative; }
       .filelist-wrapper ul li ul li:hover {
-        background: #333e51;
         color: #E0FBFC;
         cursor: pointer; }
       .filelist-wrapper ul li ul li.open-in-editor {
-        background: #333e51; }
+        background: #ef7456;
+        color: #293241; }
+        .filelist-wrapper ul li ul li.open-in-editor:hover {
+          color: #E0FBFC; }
         .filelist-wrapper ul li ul li.open-in-editor:after {
           content: ">";
           position: absolute;
@@ -492,9 +507,10 @@ template {
   height: 60px;
   padding: 0 1rem .5rem;
   align-items: center;
-  justify-content: flex-start; }
+  justify-content: space-between; }
   #golpen-nav .logo {
-    font-size: .8rem; }
+    font-size: .8rem;
+    text-align: left; }
 
 .cm-s-golpen.CodeMirror {
   background: transparent;
@@ -718,7 +734,8 @@ html, body {
   overflow-x: hidden; }
 
 body {
-  background: #EE6C4D; }
+  background-color: #EE6C4D;
+  background-image: linear-gradient(90deg, rgba(238, 108, 77, 0.8), rgba(255, 0, 0, 0) 80%), linear-gradient(180deg, #3d5280, rgba(0, 255, 0, 0) 70.71%), linear-gradient(137deg, #ee594d, rgba(0, 0, 255, 0) 70.71%); }
   body * {
     box-sizing: border-box;
     scrollbar-color: #98C1D9 #293241; }

@@ -8,7 +8,10 @@ block content
         #golpen-container
             #golpen-nav
                 .logo
-                    | ::GOLPEN_ | A New Pen | CPUs: _____ MEMs: _____ DISK: ____ IMAGE: ______________
+                    | Golem SLATE | 
+                    span.text-five
+                        | affluent-obsidian
+                include partials/config-form.pug
             #golpen-filelist.ui-col
                 #filelist
                     include partials/filelist.html
@@ -31,9 +34,7 @@ block append footer
                 theme: "golpen"
             }),
             bashconsole = CodeMirror(d.querySelector('#console-container'), {
-                value: `Output here...
-                
-                Bacon ipsum dolor amet meatball chuck sausage, ham hock cow cupim ball tip picanha drumstick pork beef bresaola burgdoggen fatback kevin. Bacon fatback ham shoulder tongue, biltong leberkas tail ham hock jowl pork loin buffalo kevin. Chislic salami tri-tip cow shankle kielbasa tongue. Bacon tri-tip doner chislic. Jowl doner capicola filet mignon corned beef swine picanha pork loin landjaeger chislic tongue.`,
+                value: `Output here...`,
                 mode: {name: "javascript", json: true},
                 lineWrapping: true,
                 theme: "golpen-console"

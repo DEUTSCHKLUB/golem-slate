@@ -1,14 +1,34 @@
 #golpen-ui-wrap{
-    background: $one;
+    position: relative;
+    background-color: $one;
+    // linear-gradient(195deg, darken($one, 5%) 0%, $one 90%);
+    background-image: linear-gradient(90deg, rgba(darken($one, 5%),0.8), rgba(255,0,0,0) 80%),
+                linear-gradient(180deg, adjust-hue($one, 7deg), rgba(0,255,0,0) 60.71%),
+                linear-gradient(157deg, adjust-hue($five, -15deg), rgba(0,255,255,0) 70.71%),
+                linear-gradient(to top, rgba($two, 0.5) 0%, rgba($two, 0.3) 5%, rgba($one, 0) 100%);
+    border-bottom: 10px solid $one;
     width:90vw;
     height:auto;
     min-height: 90vh;
+    box-shadow: 0rem 2rem 20px -15px rgba($one,.76);
     @include media-breakpoint-up(lg) {
         height: 90vh;
     }
     margin: 5vh auto;
     padding:1rem 1.5rem;
     border-radius: .7rem;
+    &:after{
+        content: "";
+        position: absolute;
+        bottom:0;
+        left:0;
+        width:100%;
+        height:2rem;
+        background: linear-gradient(0deg, rgba($three, 0.2) 0%, rgba($two, 0.2) 3%, rgba($one, 0) 100%);
+        mix-blend-mode: screen;
+        border-bottom-left-radius: .7rem;
+        border-bottom-right-radius: .7rem;
+    }
     #golpen-container{
         display:flex;
         flex-direction:column;
@@ -40,11 +60,11 @@
         #golpen-filelist{
             display:flex;
             flex-direction:column;
-            border-bottom:1px solid $three;
+            border-bottom:1px solid $two;
             // min-height: 40vh;
             @include media-breakpoint-up(lg) {
                 border-bottom:none;
-                border-right:1px solid $three;
+                border-right:1px solid $two;
                 min-width:15%;
                 max-width:20%;
             }
@@ -62,12 +82,12 @@
           }
       }
       #golpen-output{
-            border-top:1px solid $three;
+            border-top:1px solid $two;
             transition: flex .8s $transition-base;
             min-height: 50vh;
             @include media-breakpoint-up(lg) {
                 border-top:none;
-                border-left:1px solid $three;
+                border-left:1px solid $two;
                 min-width:25%;
                 max-width:25%;
             }
