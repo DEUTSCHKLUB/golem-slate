@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Golpen - The Web Editor for distributed computing' });
+  res.render('index', { title: 'Golem Slate' });
 });
 
 module.exports = router;

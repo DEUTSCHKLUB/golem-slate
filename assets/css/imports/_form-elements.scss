@@ -1,11 +1,11 @@
 /* RESET RULES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-$white: #afafaf;
+$white: $three;
 $red: $five;
 $bodyColor: $one;
 $borderFormEls: $two;
 $bgFormEls: $bodyColor;
-$bgFormElsFocus: $two;
+$bgFormElsFocus: $one;
 
 a {
   color: inherit;
@@ -43,8 +43,36 @@ select:-moz-focusring {
 
 /* FORM ELEMENTS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.form-control h1 {
-  margin-bottom: 1.5rem;
+.form-control{
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    @include media-breakpoint-up(lg){
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+    .form-group{
+        padding: 0 .4rem;
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid $two;
+        border-bottom:none;
+        margin:0 .4rem;
+        &.no-border{
+            border:none !important;
+        }
+        label{
+            margin-right:.4rem;
+            display: inline-flex;
+            align-items:center;
+            color:$two;
+            svg{
+                margin-right:.4rem;
+            }
+        }
+    }
 }
 
 .form-control li,
@@ -56,18 +84,11 @@ select:-moz-focusring {
 .form-control input,
 .form-control textarea,
 .form-control button {
-  width: 100%;
-  line-height: 1.5;
-  padding: 15px 10px;
-  border: 1px solid $borderFormEls;
+  line-height: 1;
+  padding: 5px 7px;
+  border: none;
   color: $white;
-  background: $bgFormEls;
-  transition: background-color 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25),
-    transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
-}
-
-.form-control textarea {
-  height: 170px;
+  background: transparent;
 }
 
 .form-control ::placeholder {
@@ -76,34 +97,26 @@ select:-moz-focusring {
   opacity: 1;
 }
 
-.form-control select:focus,
-.form-control input:focus,
-.form-control textarea:focus,
-.form-control button:enabled:hover,
-.form-control button:focus,
-.form-control input[type="checkbox"]:focus + label {
-  background: $bgFormElsFocus;
-}
+// .form-control select:focus,
+// .form-control input:focus,
+// .form-control textarea:focus,
+// .form-control button:enabled:hover,
+// .form-control button:focus,
+// .form-control input[type="checkbox"]:focus + label {
+//   background: $bgFormElsFocus url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/down.svg) no-repeat right center;
+//   background-size: auto 35%;
+// }
 
-.form-control select:focus,
-.form-control input:focus,
-.form-control textarea:focus {
-  transform: scale(1.02);
-}
-
-.form-control *:required,
-.form-control select {
-  background-repeat: no-repeat;
-  background-position: center right 12px;
-  background-size: 15px 15px;
-}
-
-.form-control *:required {
-  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/asterisk.svg);  
+.form-control select:focus{
+    background: $bgFormElsFocus url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/down.svg) no-repeat right center;
+    background-size: auto 35%;
 }
 
 .form-control select {
-  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/down.svg);
+  outline:0;
+  padding-right:20px;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/down.svg) no-repeat right center;
+  background-size: auto 35%;
 }
 
 .form-control *:disabled {
@@ -191,4 +204,29 @@ select:-moz-focusring {
   border-bottom: 2px solid $white;
   border-right: 2px solid $white;
   transform: rotate(45deg);
+}
+
+.btn{
+    display: inline-flex;
+    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: $six !important;
+    color: $one !important;
+    border: 1px solid transparent !important;
+    padding: .375rem .75rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    &:hover{
+        color: $six !important;
+        background-color: $one !important;
+        border-color: $six !important;
+    }
+    svg{
+        margin-right:.4rem;
+    }
 }

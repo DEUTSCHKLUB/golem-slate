@@ -4,39 +4,41 @@ block append head
     link(rel='stylesheet' href="/editor/lib/codemirror.css" type='text/css')
 
 block content
-    #golpen-ui-wrap
-        #golpen-container
-            #golpen-nav
+    #golem-slate-ui-wrap
+        #golem-slate-container
+            #golem-slate-nav
                 .logo
-                    | Golem SLATE | 
-                    span.text-five
-                        | affluent-obsidian
+                    img(src="/images/golem-slate-logo.svg")
+                    span.text-five.slate-name
+                        | slate: wiggly-obsidian
                 include partials/config-form.pug
-            #golpen-filelist.ui-col
+            #golem-slate-filelist.ui-col
                 #filelist
                     include partials/filelist.html
-            #golpen-editor.ui-col
+            #golem-slate-editor.ui-col
                 #editor-container
-            #golpen-output.ui-col
+            #golem-slate-output.ui-col
                 #console-container
 
 block append footer
-    script(src="/javascripts/golpen-ui.js")
+    script(src="/javascripts/golem-slate-ui.js")
     script(src="/editor/lib/codemirror.js")
     script(src="/editor/mode/javascript/javascript.js")
     script.
         (function(w,d){
             const editor = CodeMirror(d.querySelector('#editor-container'), {
-                value: `function golpen(){ return "Golpen is Awesome"; }\n`,
+                value: `!{code}`,
                 mode: {name: "javascript", json: true},
                 lineNumbers: true,
                 lineWrapping: true,
-                theme: "golpen"
+                theme: "golem-slate"
             }),
             bashconsole = CodeMirror(d.querySelector('#console-container'), {
-                value: `Output here...`,
+                value: `Waiting for first code run...
+                
+        Click 'Run' above to start`,
                 mode: {name: "javascript", json: true},
                 lineWrapping: true,
-                theme: "golpen-console"
+                theme: "golem-slate-console"
             });
         })(window,document);

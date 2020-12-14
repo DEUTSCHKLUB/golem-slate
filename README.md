@@ -12,4 +12,4 @@ npm run serve
 
 open your browser and go to:
 
-http://localhost:3000/gp/
+http://localhost:3000/s/

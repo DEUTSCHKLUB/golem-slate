@@ -18,7 +18,6 @@ $active-file-color:lighten($five, 2%);
                 &:checked~ul {
                     height: 100%;
                     transform-origin: top;
-                    // transition: transform .5s $transition-base;
                     transform: scaleY(1);
                 }
                 &:checked+label {
@@ -29,11 +28,15 @@ $active-file-color:lighten($five, 2%);
                 }
             }
             label {
-                display: block;
+                display: flex;
                 cursor: pointer;
                 padding: 10px;
                 position: relative;
                 border-bottom: 1px solid $two;
+                transition: background-color .3s ease-out;
+                svg{
+                    margin-right:10px;
+                }
                 &:after{
                     content:"+";
                     position: absolute;
@@ -49,8 +52,14 @@ $active-file-color:lighten($five, 2%);
             }
 
             ul li {
-                padding: 5px 20px;
+                padding: 10px 20px;
                 position: relative;
+                display:flex;
+                transition: color .3s ease-out;
+                color: $two;
+                svg{
+                    margin-right:10px;
+                }
                 &:hover {
                     // background: $bg-hover-color;
                     color:$four;
@@ -65,11 +74,11 @@ $active-file-color:lighten($five, 2%);
                     &:after{
                         content:">";
                         position: absolute;
-                        top:0;
+                        top:50%;
                         right:10px;
-                        bottom: 0;
                         font-size:1rem;
-                        line-height:2.2em;
+                        line-height:1em;
+                        transform:translate(0,-50%);
                     }
                 }
             }

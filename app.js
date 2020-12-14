@@ -5,11 +5,12 @@ const createError = require('http-errors'),
       logger = require('morgan'),
       sassMiddleware = require('node-sass-middleware'),
       bodyParser = require('body-parser'),
+      // sass processing stuff
       srcPath = __dirname + '/assets/',
       destPath = __dirname + '/public/';
 
 let indexRouter = require('./routes/index');
-let golpenRouter = require('./routes/golpens');
+let slateRouter = require('./routes/slate');
 
 var app = express();
 
@@ -34,9 +35,11 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, '/public')));
 app.use('/editor', express.static(__dirname + '/node_modules/codemirror/'));
+// map for bootstrap icons? maybe
+app.use('/icons.svg', express.static(__dirname + '/node_modules/bootstrap-icons/bootstrap-icons.svg'));
 
 app.use('/', indexRouter);
-app.use('/gp', golpenRouter);
+app.use('/s', slateRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

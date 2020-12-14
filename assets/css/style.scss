@@ -9,7 +9,7 @@
 @import "imports/golpen-ui";
 @import "imports/filelist";
 @import "imports/top-nav";
-// @import "imports/form-elements";
+@import "imports/form-elements";
 
 @import "imports/editor";
 
@@ -36,12 +36,12 @@ body{
               linear-gradient(137deg, adjust-hue($five, -7deg), rgba(0,0,255,0) 70.71%);
   *{
     box-sizing: border-box;
-    scrollbar-color:$three $one;
+    scrollbar-color:$three transparent;
     ::-webkit-scrollbar {
       width: 6px;
     }
     ::-webkit-scrollbar-track {
-      background: $one;
+      background: transparent !important;
     }
     ::-webkit-scrollbar-thumb {
       background-color: $three;
