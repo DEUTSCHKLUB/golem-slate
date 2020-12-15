@@ -26,6 +26,7 @@ block append footer
     script(src="/editor/mode/javascript/javascript.js")
     script.
         (function(w,d){
+            w.slates = {};
             const editor = CodeMirror(d.querySelector('#editor-container'), {
                 value: `!{code}`,
                 mode: {name: "javascript", json: true},
@@ -34,11 +35,12 @@ block append footer
                 theme: "golem-slate"
             }),
             bashconsole = CodeMirror(d.querySelector('#console-container'), {
-                value: `Waiting for first code run...
-                
-        Click 'Run' above to start`,
+                value: `Waiting for first code run. Click 'Run' above to start`,
                 mode: {name: "javascript", json: true},
                 lineWrapping: true,
                 theme: "golem-slate-console"
             });
+            //- I hate this but my brain is fried...I can't think of another way to save a reference ATM
+            w.slates.code = editor;
+            w.slates.output = bashconsole;
         })(window,document);

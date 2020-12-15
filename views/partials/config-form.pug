@@ -1,5 +1,5 @@
 .form-control
-	form(id="golem-config-form" action="" method="get")
+	form(id="golem-config-form" action="/s/run/" method="post")
 		.form-group
 			label(for="cpuSelect")
 				svg.bi(width='16' height='16' fill='currentColor')
@@ -19,14 +19,14 @@
 				option(selected="selected" value="2") 2 GB
 				option(value="4") 4 GB
 		.form-group
-			label(for="diskSelect")
+			label(for="discSelect")
 				svg.bi(width='16' height='16' fill='currentColor')
 					use(xlink:href='/icons.svg#hdd')
 				|Disk
-			select(name="diskSelect" id="diskSelect")
-				option(selected="selected" value="1") 4 GB
-				option(value="2") 8 GB
-				option(value="4") 16 GB
+			select(name="discSelect" id="discSelect")
+				option(selected="selected" value="4") 4 GB
+				option(value="8") 8 GB
+				option(value="16") 16 GB
 		.form-group
 			label(for="imageSelect")
 				svg.bi(width='16' height='16' fill='currentColor')
@@ -41,3 +41,28 @@
 				svg.bi(width='16' height='16' fill='currentColor')
 					use(xlink:href='/icons.svg#play-fill')
 				|Run
+
+script.
+	(function(w,d){
+		document.addEventListener('submit', event => {
+			// Prevent the default form submit
+			event.preventDefault();
+			slates.output.setValue('Starting...');
+			// Store reference to form to make later code easier to read
+			const form = event.target;
+			// Post data using the Fetch API, wait for the promise object before we send it to the terminal
+			fetch(form.action, {
+				method: form.method,
+				body: new URLSearchParams(new FormData(form))
+			}).then(res => res.text()).then(text => {
+				console.log("Success! " + JSON.stringify(text))
+				//- This is on the window :/
+				// ugh...I hope we don't have to do this shit for files but I'm afraid Codemirror only accepts strings.
+				slates.output.setValue(`Starting...
+				${JSON.stringify(text)}`.replace(/[\t]/g,''));
+			}).catch(err => {
+				// Error Handling...
+				console.log('Error! I should appear after 1 second. ' + err);
+			});
+		});
+	})(window,document);
