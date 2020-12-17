@@ -20,7 +20,19 @@ router.post('/run/', ash(async(req, res) => {
     /* destructuring the form body for use. You can now access
     them easily by using 'cpu' etc...and it will point to the form value */
     let { cpuSelect, ramSelect, discSelect, imageSelect } = req.body;
-    // file name, passed arguments are an array
+    // Trying to get a local file read and run. It kept returning a syntax error on the shell script and I'm tired for tonight...
+    // You can pass arguments in the array, then it expects a callback function with the data.
+    
+    /*
+    const runner = execFile(appRoot('/private/test.sh'), [cpuSelect, ramSelect, discSelect, imageSelect], (error, stdout, stderr) => {
+      if (error) {
+        throw error;
+      }
+      runner.stdout.pipe(res, { end: false });
+    });
+    */
+
+    // Testing with a simple PING 
     const runner = spawn('ping', ['www.google.com']);
 
     runner.stdout.pipe(res, { end: false });
