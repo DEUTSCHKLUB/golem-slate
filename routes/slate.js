@@ -1,24 +1,10 @@
 const express = require('express'),
       fs = require('fs'),
+      path = require('path'),
       exampleCode = fs.readFileSync('./views/partials/example-code.txt', 'utf8'),
       ash = require('express-async-handler'),
+      { spawn, exec, execFile } = require('child_process'),
       router = express.Router();
-
-// Functions
-
-// This is just to simulate some lag to the terminal...I wanted to see what the await bit would act like:
-
-function formatOutput (cpu,ram,disc,img){
-  let output = [];
-  for(let a in arguments){
-    output.push(` ${a}: ${arguments[a]} `);
-  }
-  return new Promise((resolve, reject) => {
-       setTimeout(() => {
-          resolve(output.join(","));
-       }, 1000);
-  });
-}
 
 /* New Golpen landing page (no id provided) */
 router.get('/', function(req, res, next) {
@@ -33,10 +19,15 @@ router.get('/', function(req, res, next) {
 router.post('/run/', ash(async(req, res) => {
     /* destructuring the form body for use. You can now access
     them easily by using 'cpu' etc...and it will point to the form value */
-    const { cpuSelect, ramSelect, discSelect, imageSelect } = req.body;
-    /* This is where we can use it to call and await the results before sending the result */
-    const ret = await formatOutput(cpuSelect, ramSelect, discSelect, imageSelect);
-    res.send(ret);
+    let { cpuSelect, ramSelect, discSelect, imageSelect } = req.body;
+    // file name, passed arguments are an array
+    const runner = spawn('ping', ['www.google.com']);
+
+    runner.stdout.pipe(res, { end: false });
+
+    runner.on('exit', function() {
+      process.exit()
+    });
 }))
 
 module.exports = router;

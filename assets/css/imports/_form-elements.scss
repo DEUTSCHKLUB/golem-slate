@@ -92,20 +92,15 @@ select:-moz-focusring {
 }
 
 .form-control ::placeholder {
-  color: inherit;
+  color: lighten($one,10%);
   /*Fix opacity issue on Firefox*/
   opacity: 1;
 }
 
-// .form-control select:focus,
-// .form-control input:focus,
-// .form-control textarea:focus,
-// .form-control button:enabled:hover,
-// .form-control button:focus,
-// .form-control input[type="checkbox"]:focus + label {
-//   background: $bgFormElsFocus url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/down.svg) no-repeat right center;
-//   background-size: auto 35%;
-// }
+.form-control input[type="text"]{
+  // border-bottom:1px solid $two;
+  outline:0;
+}
 
 .form-control select:focus{
     background: $bgFormElsFocus url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/down.svg) no-repeat right center;

@@ -32,10 +32,7 @@
 				svg.bi(width='16' height='16' fill='currentColor')
 					use(xlink:href='/icons.svg#disc')
 				|Image
-			select(name="imageSelect" id="imageSelect")
-				option(selected="selected" value="0x5AzHrUJszd4MI2") Blender (0x5AzHrUJszd4MI2)
-				option(value="S0CLDP4db6mlNaZh") Photos (S0CLDP4db6mlNaZh)
-				option(value="sW66MDjOybWSyPwD") Math (sW66MDjOybWSyPwD)
+			input(name="imageSelect" id="imageSelect" type="text" placeholder="Enter Image Hash ")
 		.form-group.no-border
 			button(type="submit" value="Run" id="submit" class="btn")
 				svg.bi(width='16' height='16' fill='currentColor')
@@ -44,7 +41,7 @@
 
 script.
 	(function(w,d){
-		document.addEventListener('submit', event => {
+		d.addEventListener('submit', event => {
 			// Prevent the default form submit
 			event.preventDefault();
 			slates.output.setValue('Starting...');
@@ -54,15 +51,23 @@ script.
 			fetch(form.action, {
 				method: form.method,
 				body: new URLSearchParams(new FormData(form))
-			}).then(res => res.text()).then(text => {
-				console.log("Success! " + JSON.stringify(text))
-				//- This is on the window :/
-				// ugh...I hope we don't have to do this shit for files but I'm afraid Codemirror only accepts strings.
-				slates.output.setValue(`Starting...
-				${JSON.stringify(text)}`.replace(/[\t]/g,''));
+			}).then(res => {
+				const reader = res.body.getReader();
+
+				reader.read().then(function processText({ done, value }) {
+					//- w.slates.output.value += new TextDecoder().decode(value);
+					//- let oldValue = slates.output.getValue();
+					const updatedValue = slates.output.getValue() + new TextDecoder().decode(value);
+					slates.output.setValue(updatedValue);
+					if (done) {
+						console.log("Stream complete");
+						return;
+					}
+					// Read some more, and call this function again
+					return reader.read().then(processText);
+				});
 			}).catch(err => {
-				// Error Handling...
-				console.log('Error! I should appear after 1 second. ' + err);
+				console.log('Error outputting stream: ' + err);
 			});
 		});
 	})(window,document);

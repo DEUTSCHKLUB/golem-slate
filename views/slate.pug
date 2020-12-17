@@ -18,7 +18,7 @@ block content
             #golem-slate-editor.ui-col
                 #editor-container
             #golem-slate-output.ui-col
-                #console-container
+                #output-container
 
 block append footer
     script(src="/javascripts/golem-slate-ui.js")
@@ -34,13 +34,14 @@ block append footer
                 lineWrapping: true,
                 theme: "golem-slate"
             }),
-            bashconsole = CodeMirror(d.querySelector('#console-container'), {
+            bashconsole = CodeMirror(d.querySelector('#output-container'), {
                 value: `Waiting for first code run. Click 'Run' above to start`,
                 mode: {name: "javascript", json: true},
                 lineWrapping: true,
                 theme: "golem-slate-console"
             });
-            //- I hate this but my brain is fried...I can't think of another way to save a reference ATM
+            
             w.slates.code = editor;
             w.slates.output = bashconsole;
+
         })(window,document);
