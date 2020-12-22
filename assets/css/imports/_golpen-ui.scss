@@ -12,7 +12,7 @@
     height:auto;
     min-height: 90vh;
     box-shadow: 0rem 2rem 20px -15px rgba($one,.5);
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-up(xl) {
         height: 90vh;
     }
     margin: 5vh auto;
@@ -39,7 +39,7 @@
         width: 100%;
         height:100%;
         flex: 1;
-        @include media-breakpoint-up(lg) {
+        @include media-breakpoint-up(xl) {
             flex-direction:row;
             flex-wrap: wrap;
         }
@@ -47,7 +47,7 @@
             width:100%;
             height:auto;
             padding:1rem;
-            @include media-breakpoint-up(lg) {
+            @include media-breakpoint-up(xl) {
                 width:auto;
                 height:calc(100% - 60px);
             }
@@ -57,16 +57,32 @@
                 font-size:0;
             }
         }
+        #golem-slate-nav{
+            width:100%;
+            order: 1;
+            @include media-breakpoint-up(xl) {
+                width:auto;
+            }
+        }
+        .form-control{
+            flex:1;
+            order: 4;
+            @include media-breakpoint-up(xl) {
+                order: 2;
+            }
+        }
         #golem-slate-filelist{
             display:flex;
             flex-direction:column;
             border-bottom:1px solid $two;
             // min-height: 40vh;
-            @include media-breakpoint-up(lg) {
+            order:2;
+            @include media-breakpoint-up(xl) {
                 border-bottom:none;
                 border-right:1px solid $two;
                 min-width:15%;
                 max-width:20%;
+                order: 3;
             }
             transition: flex .8s $transition-base;
             #filelist{
@@ -76,6 +92,12 @@
       #golem-slate-editor{
           flex: 1;
           min-height: 40vh;
+          order: 3;
+          margin: 0 0 1rem 0;
+          @include media-breakpoint-up(xl) {
+            order:4;
+            margin: 0;
+          }
           #editor-container{
               width:100%;
               height:100%;
@@ -87,11 +109,12 @@
             // min-height: 50vh;
             flex: 1;
             min-height: 40vh;
+            order:5;
             #output-container{
                 width:100%;
                 height:100%;
             }
-            @include media-breakpoint-up(lg) {
+            @include media-breakpoint-up(xl) {
                 border-top:none;
                 border-left:1px solid $two;
                 min-width:25%;

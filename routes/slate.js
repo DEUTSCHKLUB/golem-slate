@@ -16,30 +16,51 @@ router.get('/', function(req, res, next) {
    This is where we can make the socket for the terminal and return it to the view I'm hoping.
 */
 
-router.post('/run/', ash(async(req, res) => {
+router.post('/run/', (req, res) => {
     /* destructuring the form body for use. You can now access
     them easily by using 'cpu' etc...and it will point to the form value */
+    res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
     let { cpuSelect, ramSelect, discSelect, imageSelect } = req.body;
-    // Trying to get a local file read and run. It kept returning a syntax error on the shell script and I'm tired for tonight...
-    // You can pass arguments in the array, then it expects a callback function with the data.
-    
-    /*
-    const runner = execFile(appRoot('/private/test.sh'), [cpuSelect, ramSelect, discSelect, imageSelect], (error, stdout, stderr) => {
-      if (error) {
-        throw error;
-      }
-      runner.stdout.pipe(res, { end: false });
-    });
-    */
 
-    // Testing with a simple PING 
-    const runner = spawn('ping', ['www.google.com']);
-
+    const runner = spawn('sh', [`${ appRoot + '/private/test.sh' }`,cpuSelect, ramSelect, discSelect, imageSelect]);
     runner.stdout.pipe(res, { end: false });
-
-    runner.on('exit', function() {
-      process.exit()
+    runner.stderr.pipe(res, { end: false });
+    runner.on('close', (code, signal) => {
+      console.log(`child process exited with code ${code} and signal ${signal}`);
     });
-}))
+
+    // res.setHeader("Content-Type", "text/event-stream");
+    // res.setHeader("Cache-control", "no-cache");
+
+    // let spw = cp.spawn('sh', [`${ appRoot + '/private/test.sh' }`]),
+    //   str = "";
+
+    // spw.stdout.on('data', function (data) {
+    //     str += data.toString();
+
+    //     // just so we can see the server is doing something
+    //     console.log("data");
+
+    //     // Flush out line by line.
+    //     var lines = str.split("\n");
+    //     for(var i in lines) {
+    //         if(i == lines.length - 1) {
+    //             str = lines[i];
+    //         } else{
+    //             // Note: The double-newline is *required*
+    //             res.write('data: ' + lines[i] + "\n\n");
+    //         }
+    //     }
+    // });
+
+    // spw.on('close', function (code) {
+    //     res.end(str);
+    // });
+
+    // spw.stderr.on('data', function (data) {
+    //     res.end('stderr: ' + data);
+    // });
+    
+});
 
 module.exports = router;

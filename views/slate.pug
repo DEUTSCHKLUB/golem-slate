@@ -11,7 +11,8 @@ block content
                     img(src="/images/golem-slate-logo.svg")
                     span.text-five.slate-name
                         | slate: wiggly-obsidian
-                include partials/config-form.pug
+            include partials/config-form.pug
+            .break
             #golem-slate-filelist.ui-col
                 #filelist
                     include partials/filelist.html
@@ -21,7 +22,6 @@ block content
                 #output-container
 
 block append footer
-    script(src="/javascripts/golem-slate-ui.js")
     script(src="/editor/lib/codemirror.js")
     script(src="/editor/mode/javascript/javascript.js")
     script.
@@ -38,7 +38,8 @@ block append footer
                 value: `Waiting for first code run. Click 'Run' above to start`,
                 mode: {name: "javascript", json: true},
                 lineWrapping: true,
-                theme: "golem-slate-console"
+                theme: "golem-slate-console",
+                readOnly: true
             });
             
             w.slates.code = editor;

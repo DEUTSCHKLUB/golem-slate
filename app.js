@@ -9,7 +9,7 @@ const createError = require('http-errors'),
       srcPath = __dirname + '/assets/',
       destPath = __dirname + '/public/';
 
-global.appRoot = require('app-root-path').require;
+global.appRoot = require('app-root-path');
 
 let indexRouter = require('./routes/index');
 let slateRouter = require('./routes/slate');

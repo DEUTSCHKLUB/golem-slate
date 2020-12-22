@@ -44,19 +44,23 @@ script.
 		d.addEventListener('submit', event => {
 			// Prevent the default form submit
 			event.preventDefault();
-			slates.output.setValue('Starting...');
+
+			slates.output.setValue('Starting...\n');
 			// Store reference to form to make later code easier to read
-			const form = event.target;
+			const form = event.target;	
+			
 			// Post data using the Fetch API, wait for the promise object before we send it to the terminal
 			fetch(form.action, {
 				method: form.method,
+				mode: 'same-origin',
+				referrerPolicy: 'same-origin',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+				},
 				body: new URLSearchParams(new FormData(form))
 			}).then(res => {
 				const reader = res.body.getReader();
-
 				reader.read().then(function processText({ done, value }) {
-					//- w.slates.output.value += new TextDecoder().decode(value);
-					//- let oldValue = slates.output.getValue();
 					const updatedValue = slates.output.getValue() + new TextDecoder().decode(value);
 					slates.output.setValue(updatedValue);
 					if (done) {

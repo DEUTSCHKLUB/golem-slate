@@ -47,19 +47,34 @@ select:-moz-focusring {
     display:flex;
     justify-content: space-between;
     align-items: flex-start;
+    justify-content: center;
     flex-direction: column;
-    @include media-breakpoint-up(lg){
+    width:100%;
+    @include media-breakpoint-up(md){
         flex-direction: row;
-        align-items: center;
+        align-items: flex-end;
+        justify-content: flex-end;
         flex-wrap: nowrap;
+    }
+    form{
+      width:100%;
+      @include media-breakpoint-up(lg){
+        width:auto;
+      }
     }
     .form-group{
         padding: 0 .4rem;
-        display: inline-flex;
+        display: flex;
         align-items: center;
         border: 1px solid $two;
         border-bottom:none;
-        margin:0 .4rem;
+        margin:.5rem 0;
+        // width:100%;
+        @include media-breakpoint-up(lg){
+          display: inline-flex;
+          margin:0 .4rem 0 0;
+          width:auto;
+        }
         &.no-border{
             border:none !important;
         }
