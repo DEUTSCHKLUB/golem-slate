@@ -3,6 +3,7 @@ $active-file-color:lighten($five, 2%);
 .filelist-wrapper {
     margin: auto;
     width: 100%;
+    max-width: 100%;
     ul {
         list-style: none;
         margin: 0;
@@ -83,5 +84,82 @@ $active-file-color:lighten($five, 2%);
                 }
             }
         }
+    }
+}
+
+// File upload
+#fileslbl {
+    --border-width: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:$two;
+    padding: 1rem;
+    text-align: center;
+    transition: .5s;
+    position: relative;
+    width: 100%;
+    height: 200px;
+    text-transform: uppercase;
+    color: $two;
+    border-radius: var(--border-width);
+    &:after {
+        position: absolute;
+        content: "";
+        top: calc(-1 * var(--border-width));
+        left: calc(-1 * var(--border-width));
+        z-index: -1;
+        width: calc(100% + var(--border-width) * 2);
+        height: calc(100% + var(--border-width) * 2);
+        background: linear-gradient(
+            60deg,
+            hsl(224, 85%, 66%),
+            hsl(269, 85%, 66%),
+            hsl(314, 85%, 66%),
+            hsl(359, 85%, 66%),
+            hsl(44, 85%, 66%),
+            hsl(89, 85%, 66%),
+            hsl(134, 85%, 66%),
+            hsl(179, 85%, 66%)
+        );
+        background-size: 300% 300%;
+        background-position: 0 50%;
+        border-radius: calc(2 * var(--border-width));
+        animation: moveGradient 4s alternate infinite;
+    }
+}
+
+@keyframes moveGradient {
+    50% {
+      background-position: 100% 50%;
+    }
+}
+
+#filesfld {
+    display: none;
+}
+
+#progress {
+    width: 0;
+    // background-color: $five;
+    color: $one;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 25px;
+    padding: 0 5px;
+}
+
+$five-dark: darken($five, 10%);
+$five-light: lighten($five, 10%);
+
+@keyframes dropbox {
+    0% {
+        background-image: repeating-linear-gradient(30deg, $five 1%, $five 3%, $five-dark 5%, $five-dark 5%);
+    }
+    50% {
+        background-image: repeating-linear-gradient(30deg, $five-dark 1%, $five-dark 3%, $five 5%, $five 5%);
+    }
+    100% {
+        background-image: repeating-linear-gradient(30deg, $five 1%, $five 3%, $five-dark 5%, $five-dark 5%);
     }
 }

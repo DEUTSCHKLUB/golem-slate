@@ -1,6 +1,19 @@
 <h4 class="text-two column-title">Files:</h4>
 <div class="filelist-wrapper">
-    <ul>
+
+    <!-- <form id="file-upload-form" action="/s/upload" method="post" onsubmit="return submitFilesForm(this);">
+        <input type="file" name="filesfld" id="filesfld" accept="*" class="btn" onchange="submitFilesForm(this.form);" multiple />
+        <label for="filesfld" id="fileslbl" ondragover="stopDefault(event);dragOver(this, 'Drop files to upload them.');" ondragenter="stopDefault(event);dragOver(this, 'Drop files to upload them.');" ondragleave="stopDefault(event);dragLeave(this);" ondrop="stopDefault(event);dragLeave(this);addFilesAndSubmit(event);">Click or drag-n-drop files here</label>
+    </form>
+    <div style="text-align: left;">
+        <div id="progress"></div>
+    </div> -->
+    <div class="progress">
+        <div class="progress-bar" role="progressbar"></div>
+    </div>
+    <input id="file-upload-field" type="file" name="uploads[]" multiple="multiple">
+
+    <!-- <ul>
         <li>
             <input type="checkbox" id="list-item-1">
             <label for="list-item-1" class="first folder-label">
@@ -53,5 +66,5 @@
                     </svg>image_05.jpg</li>
             </ul>
         </li>
-    </ul>
+    </ul> -->
 </div>
