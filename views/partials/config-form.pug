@@ -1,5 +1,5 @@
-.form-control
-	form(id="golem-config-form" action="/s/run/" method="post")
+.form-control.flex-auto
+	form(id="golem-config-form" action="/s/run/" method="POST")
 		.form-group
 			label(for="cpuSelect")
 				svg.bi(width='16' height='16' fill='currentColor')
@@ -41,7 +41,9 @@
 
 script.
 	(function(w,d){
-		d.addEventListener('submit', event => {
+		const configForm = d.getElementById("golem-config-form");
+		configForm.addEventListener('submit', event => {
+
 			// Prevent the default form submit
 			event.preventDefault();
 
@@ -52,11 +54,6 @@ script.
 			// Post data using the Fetch API, wait for the promise object before we send it to the terminal
 			fetch(form.action, {
 				method: form.method,
-				mode: 'same-origin',
-				referrerPolicy: 'same-origin',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-				},
 				body: new URLSearchParams(new FormData(form))
 			}).then(res => {
 				const reader = res.body.getReader();

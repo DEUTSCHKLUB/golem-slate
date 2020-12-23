@@ -20,6 +20,7 @@ router.post('/run/', (req, res) => {
     /* destructuring the form body for use. You can now access
     them easily by using 'cpu' etc...and it will point to the form value */
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+    res.setHeader("Content-Type", "text/event-stream");
     let { cpuSelect, ramSelect, discSelect, imageSelect } = req.body;
 
     const runner = spawn('sh', [`${ appRoot + '/private/test.sh' }`,cpuSelect, ramSelect, discSelect, imageSelect]);
@@ -28,39 +29,6 @@ router.post('/run/', (req, res) => {
     runner.on('close', (code, signal) => {
       console.log(`child process exited with code ${code} and signal ${signal}`);
     });
-
-    // res.setHeader("Content-Type", "text/event-stream");
-    // res.setHeader("Cache-control", "no-cache");
-
-    // let spw = cp.spawn('sh', [`${ appRoot + '/private/test.sh' }`]),
-    //   str = "";
-
-    // spw.stdout.on('data', function (data) {
-    //     str += data.toString();
-
-    //     // just so we can see the server is doing something
-    //     console.log("data");
-
-    //     // Flush out line by line.
-    //     var lines = str.split("\n");
-    //     for(var i in lines) {
-    //         if(i == lines.length - 1) {
-    //             str = lines[i];
-    //         } else{
-    //             // Note: The double-newline is *required*
-    //             res.write('data: ' + lines[i] + "\n\n");
-    //         }
-    //     }
-    // });
-
-    // spw.on('close', function (code) {
-    //     res.end(str);
-    // });
-
-    // spw.stderr.on('data', function (data) {
-    //     res.end('stderr: ' + data);
-    // });
-    
 });
 
 module.exports = router;

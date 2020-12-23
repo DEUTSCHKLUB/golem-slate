@@ -9,9 +9,11 @@
   "dependencies": {
     "app-root-path": "^3.0.0",
     "body-parser": "^1.19.0",
+    "bootstrap": "^4.5.3",
     "bootstrap-icons": "^1.2.1",
     "codemirror": "^5.58.3",
     "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-async-handler": "^1.1.4",

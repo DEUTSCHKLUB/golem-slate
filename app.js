@@ -5,6 +5,7 @@ const createError = require('http-errors'),
       logger = require('morgan'),
       sassMiddleware = require('node-sass-middleware'),
       bodyParser = require('body-parser'),
+      cors = require('cors'),
       // sass processing stuff
       srcPath = __dirname + '/assets/',
       destPath = __dirname + '/public/';
@@ -21,7 +22,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(logger('dev'));
-
+// use CORS on all them routes
+app.use(cors());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
