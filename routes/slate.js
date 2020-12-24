@@ -55,6 +55,8 @@ router.post('/run', (req, res) => {
     res.setHeader("Content-Type", "text/event-stream");
     let { cpuSelect, ramSelect, discSelect, imageSelect } = req.body;
 
+    imageSelect = imageSelect.replace(/[^a-zA-Z0-9]/g, "");
+
     const runner = spawn('sh', ['/home/derek/Desktop/golem-alpha3/yajsapi/examples/golem-codepen/disks/runPen.sh', 'diskOne', imageSelect, cpuSelect, ramSelect, discSelect]);
     runner.stdout.pipe(res, { end: false });
     runner.stderr.pipe(res, { end: false });
