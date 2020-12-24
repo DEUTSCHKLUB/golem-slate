@@ -32,7 +32,21 @@
 				svg.bi(width='16' height='16' fill='currentColor')
 					use(xlink:href='/icons.svg#disc')
 				|Image
-			input(name="imageSelect" id="imageSelect" type="text" placeholder="Enter Image Hash ")
+			input#imageSelect.datalist(type="text" list='images' name='imageSelect' placeholder="Enter Image Hash" autocomplete="off")
+			datalist#images
+				option(value='cderycvgbhkun')
+					|cderycvgbhkun
+				option(value='xceryctibvuoi')
+					|xceryctibvuoi
+				option(value='xderycvtyubur')
+					|xderycvtyubur
+				option(value='crtuvbyuionmo')
+					|crtuvbyuionmo
+				option(value='crftuvyuichsi')
+					|crftuvyuichsi
+				option(value='crtcfyhuinuio')
+					|crtcfyhuinuio
+
 		.form-group.no-border
 			button(type="submit" value="Run" id="submit" class="btn")
 				svg.bi(width='16' height='16' fill='currentColor')
@@ -41,13 +55,14 @@
 
 script.
 	(function(w,d){
+
+		// config form submit
 		const configForm = d.getElementById("golem-config-form");
 		configForm.addEventListener('submit', event => {
 
 			// Prevent the default form submit
 			event.preventDefault();
 
-			// slates.output.setValue('Starting...\n');
 			// Store reference to form to make later code easier to read
 			const form = event.target;	
 			
@@ -59,7 +74,6 @@ script.
 				const reader = res.body.getReader();
 				reader.read().then(function processText({ done, value }) {
 					let receivedText = new TextDecoder().decode(value)
-					// console.log(receivedText);
 					slates.output.replaceRange(receivedText, CodeMirror.Pos(slates.output.lastLine()));
 
 					slates.output.scrollTo(0, slates.output.getScrollInfo().height);
@@ -68,7 +82,6 @@ script.
 						console.log("Stream complete");
 						return;
 					}
-					// Read some more, and call this function again
 					return reader.read().then(processText);
 				});
 			}).catch(err => {

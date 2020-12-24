@@ -3004,7 +3004,7 @@ template {
         #golem-slate-ui-wrap #golem-slate-container #golem-slate-filelist {
           border-bottom: none;
           border-right: 1px solid #3D5A80;
-          min-width: 15%;
+          min-width: 20%;
           max-width: 20%;
           order: 3; } }
       #golem-slate-ui-wrap #golem-slate-container #golem-slate-filelist #filelist {
@@ -3034,65 +3034,42 @@ template {
         #golem-slate-ui-wrap #golem-slate-container #golem-slate-output {
           border-top: none;
           border-left: 1px solid #3D5A80;
-          min-width: 25%;
-          max-width: 25%; } }
+          max-width: 35%; } }
 
 .filelist-wrapper {
-  margin: auto;
+  margin: 30px auto 0;
   width: 100%;
   max-width: 100%; }
   .filelist-wrapper ul {
     list-style: none;
     margin: 0;
     padding: 0; }
-    .filelist-wrapper ul li input[type="checkbox"] {
-      position: absolute;
-      left: -9999px; }
-      .filelist-wrapper ul li input[type="checkbox"] ~ ul {
-        height: 0;
-        transform: scaleY(0); }
-      .filelist-wrapper ul li input[type="checkbox"]:checked ~ ul {
-        height: 100%;
-        transform-origin: top;
-        transform: scaleY(1); }
-      .filelist-wrapper ul li input[type="checkbox"]:checked + label:after {
-        content: "-"; }
-    .filelist-wrapper ul li label {
-      display: flex;
-      cursor: pointer;
-      padding: 10px;
+    .filelist-wrapper ul li {
+      padding: 7px 10px;
       position: relative;
+      display: flex;
+      transition: all .3s ease-out;
+      color: #3D5A80;
       border-bottom: 1px solid #3D5A80;
-      transition: background-color .3s ease-out; }
-      .filelist-wrapper ul li label svg {
-        margin-right: 10px; }
-      .filelist-wrapper ul li label:after {
-        content: "+";
-        position: absolute;
-        top: 0;
-        right: 10px;
-        bottom: 0;
-        font-size: 1.2rem;
-        line-height: 2.4em; }
-      .filelist-wrapper ul li label:hover {
-        background: #2d3747; }
-    .filelist-wrapper ul li ul li {
-      padding: 10px 20px;
-      position: relative;
-      display: flex;
-      transition: color .3s ease-out;
-      color: #3D5A80; }
-      .filelist-wrapper ul li ul li svg {
-        margin-right: 10px; }
-      .filelist-wrapper ul li ul li:hover {
+      overflow-x: hidden; }
+      .filelist-wrapper ul li:last-of-type {
+        border-bottom: none; }
+      .filelist-wrapper ul li a {
+        text-decoration: none;
+        word-break: break-all; }
+        .filelist-wrapper ul li a i {
+          margin-right: 5px; }
+      .filelist-wrapper ul li:hover {
+        background: #ef7456;
         color: #E0FBFC;
-        cursor: pointer; }
-      .filelist-wrapper ul li ul li.open-in-editor {
+        cursor: pointer;
+        overflow-x: initial; }
+      .filelist-wrapper ul li.open-in-editor {
         background: #ef7456;
         color: #293241; }
-        .filelist-wrapper ul li ul li.open-in-editor:hover {
+        .filelist-wrapper ul li.open-in-editor:hover {
           color: #E0FBFC; }
-        .filelist-wrapper ul li ul li.open-in-editor:after {
+        .filelist-wrapper ul li.open-in-editor:after {
           content: ">";
           position: absolute;
           top: 50%;
@@ -3101,57 +3078,33 @@ template {
           line-height: 1em;
           transform: translate(0, -50%); }
 
-#fileslbl {
-  --border-width: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.drop-label {
+  display: block;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
   color: #3D5A80;
-  padding: 1rem;
+  width: 94%;
+  height: 100px;
+  border: 1px solid #EE6C4D;
+  border-radius: 6px;
+  padding: 20px;
   text-align: center;
-  transition: .5s;
-  position: relative;
+  position: relative; }
+  .drop-label.highlight, .drop-label:hover {
+    color: #9FCC2E;
+    border-color: #9FCC2E; }
+
+#file-upload-field {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
   width: 100%;
-  height: 200px;
-  text-transform: uppercase;
-  color: #3D5A80;
-  border-radius: var(--border-width); }
-  #fileslbl:after {
-    position: absolute;
-    content: "";
-    top: calc(-1 * var(--border-width));
-    left: calc(-1 * var(--border-width));
-    z-index: -1;
-    width: calc(100% + var(--border-width) * 2);
-    height: calc(100% + var(--border-width) * 2);
-    background: linear-gradient(60deg, #5f86f2, #a65ff2, #f25fd0, #f25f61, #f2cb5f, #abf25f, #5ff281, #5ff2f0);
-    background-size: 300% 300%;
-    background-position: 0 50%;
-    border-radius: calc(2 * var(--border-width));
-    animation: moveGradient 4s alternate infinite; }
-
-@keyframes moveGradient {
-  50% {
-    background-position: 100% 50%; } }
-
-#filesfld {
-  display: none; }
-
-#progress {
-  width: 0;
-  color: #293241;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 25px;
-  padding: 0 5px; }
-
-@keyframes dropbox {
-  0% {
-    background-image: repeating-linear-gradient(30deg, #EE6C4D 1%, #EE6C4D 3%, #ea461e 5%, #ea461e 5%); }
-  50% {
-    background-image: repeating-linear-gradient(30deg, #ea461e 1%, #ea461e 3%, #EE6C4D 5%, #EE6C4D 5%); }
-  100% {
-    background-image: repeating-linear-gradient(30deg, #EE6C4D 1%, #EE6C4D 3%, #ea461e 5%, #ea461e 5%); } }
+  height: 100%;
+  display: block;
+  z-index: 0; }
 
 #golem-slate-nav {
   display: inline-flex;

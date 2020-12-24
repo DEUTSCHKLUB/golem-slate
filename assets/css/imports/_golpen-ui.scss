@@ -80,7 +80,7 @@
             @include media-breakpoint-up(xl) {
                 border-bottom:none;
                 border-right:1px solid $two;
-                min-width:15%;
+                min-width:20%;
                 max-width:20%;
                 order: 3;
             }
@@ -117,8 +117,7 @@
             @include media-breakpoint-up(xl) {
                 border-top:none;
                 border-left:1px solid $two;
-                min-width:25%;
-                max-width:25%;
+                max-width:35%;
             }
       }
     }

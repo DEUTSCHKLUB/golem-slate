@@ -3,6 +3,7 @@ const express = require('express'),
       path = require('path'),
       exampleCode = fs.readFileSync('./views/partials/example-code.txt', 'utf8'),
       // ash = require('express-async-handler'),
+      fileDir = './files/',
       formidable = require('formidable'),
       tree = require("directory-tree"),
       { spawn, exec, execFile } = require('child_process'),
@@ -10,7 +11,7 @@ const express = require('express'),
 
 /* New Golpen landing page (no id provided) */
 router.get('/', function(req, res, next) {
-  res.render('slate', { title: 'Golem Slate', code: exampleCode });
+  res.render('slate', { title: 'Golem Slate', code: exampleCode, files: tree(fileDir) });
 });
 
 /* FILE UPLOAD AND SAVE TO DISK ENDPOINT */
@@ -18,8 +19,8 @@ router.get('/', function(req, res, next) {
 router.post("/upload", function(req, res) {
   const form = formidable({ multiples: true });
 
-  // store all uploads in the /uploads directory
-  form.uploadDir = `${ appRoot + '/files/' }`; 
+  // store all uploads in the /files directory
+  form.uploadDir = fileDir; 
   
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
@@ -38,8 +39,6 @@ router.post("/upload", function(req, res) {
   // once all the files have been uploaded, send a JSON object back reading the file tree of the uploads
   // this way, in case we want to upload more files, we can just pass back a new scan to grab files
   form.on('end', function() {
-    // res.end('success');
-    // pass that object of files or method to scan folder...
     res.json(tree(form.uploadDir));
   }); 
   
@@ -47,9 +46,7 @@ router.post("/upload", function(req, res) {
   form.parse(req);
 });
 
-/* RUN Form Route
-   It's an async function that waits for certain data before posting the response
-*/
+/* RUN Form Route */
 
 router.post('/run', (req, res) => {
     /* destructuring the form body for use. You can now access

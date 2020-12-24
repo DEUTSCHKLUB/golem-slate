@@ -39,6 +39,7 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, '/public')));
 app.use('/editor', express.static(__dirname + '/node_modules/codemirror/'));
+app.use('/bifont', express.static(__dirname + '/node_modules/bootstrap-icons/font/'));
 // map for bootstrap icons? maybe
 app.use('/icons.svg', express.static(__dirname + '/node_modules/bootstrap-icons/bootstrap-icons.svg'));
 

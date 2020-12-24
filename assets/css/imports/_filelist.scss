@@ -1,7 +1,7 @@
 $bg-hover-color:lighten($one, 2%);
 $active-file-color:lighten($five, 2%);
 .filelist-wrapper {
-    margin: auto;
+    margin: 30px auto 0;
     width: 100%;
     max-width: 100%;
     ul {
@@ -9,157 +9,76 @@ $active-file-color:lighten($five, 2%);
         margin: 0;
         padding: 0;
         li {
-            input[type="checkbox"] {
-                position: absolute;
-                left: -9999px;
-                &~ul {
-                    height: 0;
-                    transform: scaleY(0);
-                }
-                &:checked~ul {
-                    height: 100%;
-                    transform-origin: top;
-                    transform: scaleY(1);
-                }
-                &:checked+label {
-                    // background: $bg-hover-color;
-                    &:after{
-                        content:"-";
-                    }
+            padding: 7px 10px;
+            position: relative;
+            display:flex;
+            transition: all .3s ease-out;
+            color: $two;
+            border-bottom: 1px solid $two;
+            overflow-x:hidden;
+            &:last-of-type{
+                border-bottom:none;
+            }
+            a{
+                text-decoration: none;
+                word-break: break-all;
+                i{
+                    margin-right:5px;
                 }
             }
-            label {
-                display: flex;
-                cursor: pointer;
-                padding: 10px;
-                position: relative;
-                border-bottom: 1px solid $two;
-                transition: background-color .3s ease-out;
-                svg{
-                    margin-right:10px;
+            &:hover {
+                background: $active-file-color;
+                color:$four;
+                cursor:pointer;
+                overflow-x:initial;
+            }
+            &.open-in-editor{
+                background: $active-file-color;
+                color:$one;
+                &:hover {
+                    color:$four;
                 }
                 &:after{
-                    content:"+";
+                    content:">";
                     position: absolute;
-                    top:0;
+                    top:50%;
                     right:10px;
-                    bottom: 0;
-                    font-size:1.2rem;
-                    line-height:2.4em;
-                }
-                &:hover {
-                    background: $bg-hover-color;
-                }
-            }
-
-            ul li {
-                padding: 10px 20px;
-                position: relative;
-                display:flex;
-                transition: color .3s ease-out;
-                color: $two;
-                svg{
-                    margin-right:10px;
-                }
-                &:hover {
-                    // background: $bg-hover-color;
-                    color:$four;
-                    cursor:pointer;
-                }
-                &.open-in-editor{
-                    background: $active-file-color;
-                    color:$one;
-                    &:hover {
-                        color:$four;
-                    }
-                    &:after{
-                        content:">";
-                        position: absolute;
-                        top:50%;
-                        right:10px;
-                        font-size:1rem;
-                        line-height:1em;
-                        transform:translate(0,-50%);
-                    }
+                    font-size:1rem;
+                    line-height:1em;
+                    transform:translate(0,-50%);
                 }
             }
         }
     }
 }
 
-// File upload
-#fileslbl {
-    --border-width: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+.drop-label {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
     color:$two;
-    padding: 1rem;
-    text-align: center;
-    transition: .5s;
+    width:94%;
+    height:100px;
+    border: 1px solid $five;
+    border-radius: 6px;
+    padding: 20px;
+    text-align:center;
     position: relative;
+    &.highlight, &:hover {
+        color:$six;
+        border-color: $six;
+    }
+  }
+  #file-upload-field {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom:0;
+    opacity: 0;
     width: 100%;
-    height: 200px;
-    text-transform: uppercase;
-    color: $two;
-    border-radius: var(--border-width);
-    &:after {
-        position: absolute;
-        content: "";
-        top: calc(-1 * var(--border-width));
-        left: calc(-1 * var(--border-width));
-        z-index: -1;
-        width: calc(100% + var(--border-width) * 2);
-        height: calc(100% + var(--border-width) * 2);
-        background: linear-gradient(
-            60deg,
-            hsl(224, 85%, 66%),
-            hsl(269, 85%, 66%),
-            hsl(314, 85%, 66%),
-            hsl(359, 85%, 66%),
-            hsl(44, 85%, 66%),
-            hsl(89, 85%, 66%),
-            hsl(134, 85%, 66%),
-            hsl(179, 85%, 66%)
-        );
-        background-size: 300% 300%;
-        background-position: 0 50%;
-        border-radius: calc(2 * var(--border-width));
-        animation: moveGradient 4s alternate infinite;
-    }
-}
-
-@keyframes moveGradient {
-    50% {
-      background-position: 100% 50%;
-    }
-}
-
-#filesfld {
-    display: none;
-}
-
-#progress {
-    width: 0;
-    // background-color: $five;
-    color: $one;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 25px;
-    padding: 0 5px;
-}
-
-$five-dark: darken($five, 10%);
-$five-light: lighten($five, 10%);
-
-@keyframes dropbox {
-    0% {
-        background-image: repeating-linear-gradient(30deg, $five 1%, $five 3%, $five-dark 5%, $five-dark 5%);
-    }
-    50% {
-        background-image: repeating-linear-gradient(30deg, $five-dark 1%, $five-dark 3%, $five 5%, $five 5%);
-    }
-    100% {
-        background-image: repeating-linear-gradient(30deg, $five 1%, $five 3%, $five-dark 5%, $five-dark 5%);
-    }
-}
+    height: 100%;
+    display: block;
+    z-index:0;
+  }

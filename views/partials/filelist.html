@@ -1,70 +1,14 @@
 <h4 class="text-two column-title">Files:</h4>
-<div class="filelist-wrapper">
 
-    <!-- <form id="file-upload-form" action="/s/upload" method="post" onsubmit="return submitFilesForm(this);">
-        <input type="file" name="filesfld" id="filesfld" accept="*" class="btn" onchange="submitFilesForm(this.form);" multiple />
-        <label for="filesfld" id="fileslbl" ondragover="stopDefault(event);dragOver(this, 'Drop files to upload them.');" ondragenter="stopDefault(event);dragOver(this, 'Drop files to upload them.');" ondragleave="stopDefault(event);dragLeave(this);" ondrop="stopDefault(event);dragLeave(this);addFilesAndSubmit(event);">Click or drag-n-drop files here</label>
-    </form>
-    <div style="text-align: left;">
-        <div id="progress"></div>
-    </div> -->
-    <div class="progress">
-        <div class="progress-bar" role="progressbar"></div>
-    </div>
+<!-- File Upload Field -->
+
+<label class="drop-label" for="file-upload-field" id="file-upload-label">
+    <svg class="bi" width="18" height="18" fill="currentColor">
+        <use xlink:href="/icons.svg#download" />
+    </svg>
+    <br />
+    Click or Drop Files Here
     <input id="file-upload-field" type="file" name="uploads[]" multiple="multiple">
+</label>
 
-    <!-- <ul>
-        <li>
-            <input type="checkbox" id="list-item-1">
-            <label for="list-item-1" class="first folder-label">
-                <svg class="bi" width="22" height="22" fill="currentColor">
-                    <use xlink:href="/icons.svg#folder2" />
-                </svg>
-                code
-            </label>
-            <ul>
-                <li><svg class="bi" width="22" height="22" fill="currentColor">
-                        <use xlink:href="/icons.svg#file-earmark-code" />
-                    </svg> blender.js</li>
-                <li class="open-in-editor"><svg class="bi" width="22" height="22" fill="currentColor">
-                        <use xlink:href="/icons.svg#file-earmark-code" />
-                    </svg> blender.ts</li>
-                <li><svg class="bi" width="22" height="22" fill="currentColor">
-                        <use xlink:href="/icons.svg#file-earmark-code" />
-                    </svg>blender.py</li>
-                <li><svg class="bi" width="22" height="22" fill="currentColor">
-                        <use xlink:href="/icons.svg#file-earmark-code" />
-                    </svg>cubes.scene</li>
-                <li><svg class="bi" width="22" height="22" fill="currentColor">
-                        <use xlink:href="/icons.svg#file-earmark-code" />
-                    </svg>output.jpg</li>
-            </ul>
-        </li>
-        <li>
-            <input type="checkbox" id="list-item-2">
-            <label for="list-item-2" class="first folder-label">
-                <svg class="bi" width="22" height="22" fill="currentColor">
-                    <use xlink:href="/icons.svg#folder2" />
-                </svg>
-                assets
-            </label>
-            <ul>
-                <li><svg class="bi" width="22" height="22" fill="currentColor">
-                        <use xlink:href="/icons.svg#file-earmark-binary" />
-                    </svg>image_01.jpg</li>
-                <li><svg class="bi" width="22" height="22" fill="currentColor">
-                        <use xlink:href="/icons.svg#file-earmark-binary" />
-                    </svg>image_02.jpg</li>
-                <li><svg class="bi" width="22" height="22" fill="currentColor">
-                        <use xlink:href="/icons.svg#file-earmark-binary" />
-                    </svg>image_03.jpg</li>
-                <li><svg class="bi" width="22" height="22" fill="currentColor">
-                        <use xlink:href="/icons.svg#file-earmark-binary" />
-                    </svg>image_04.jpg</li>
-                <li><svg class="bi" width="22" height="22" fill="currentColor">
-                        <use xlink:href="/icons.svg#file-earmark-binary" />
-                    </svg>image_05.jpg</li>
-            </ul>
-        </li>
-    </ul> -->
-</div>
+<div class="filelist-wrapper"></div>

@@ -2,6 +2,7 @@ extends layout
 
 block append head
     link(rel='stylesheet' href="/editor/lib/codemirror.css" type='text/css')
+    link(rel='stylesheet' href="/bifont/bootstrap-icons.css" type='text/css')
 
 block content
     #golem-slate-ui-wrap
@@ -15,7 +16,7 @@ block content
             .break.col-12
             #golem-slate-filelist.ui-col
                 #filelist
-                    include partials/filelist.html
+                    include partials/filelist.pug
             #golem-slate-editor.ui-col
                 #editor-container
             #golem-slate-output.ui-col
