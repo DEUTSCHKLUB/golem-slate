@@ -47,7 +47,7 @@ script.
 			// Prevent the default form submit
 			event.preventDefault();
 
-			slates.output.setValue('Starting...\n');
+			// slates.output.setValue('Starting...\n');
 			// Store reference to form to make later code easier to read
 			const form = event.target;	
 			
@@ -58,8 +58,12 @@ script.
 			}).then(res => {
 				const reader = res.body.getReader();
 				reader.read().then(function processText({ done, value }) {
-					const updatedValue = slates.output.getValue() + new TextDecoder().decode(value);
-					slates.output.setValue(updatedValue);
+					let receivedText = new TextDecoder().decode(value)
+					// console.log(receivedText);
+					slates.output.replaceRange(receivedText, CodeMirror.Pos(slates.output.lastLine()));
+
+					slates.output.scrollTo(0, slates.output.getScrollInfo().height);
+										
 					if (done) {
 						console.log("Stream complete");
 						return;
