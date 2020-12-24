@@ -22,7 +22,7 @@ router.post('/run/', (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
     let { cpuSelect, ramSelect, discSelect, imageSelect } = req.body;
 
-    const runner = spawn('sh', [`${ appRoot + '/private/test.sh' }`,cpuSelect, ramSelect, discSelect, imageSelect]);
+    const runner = spawn('sh', ['/home/derek/Desktop/golem-alpha3/yajsapi/examples/golem-codepen/disks/runPen.sh', 'diskOne', imageSelect, cpuSelect, ramSelect, discSelect]);
     runner.stdout.pipe(res, { end: false });
     runner.stderr.pipe(res, { end: false });
     runner.on('close', (code, signal) => {
