@@ -3252,6 +3252,10 @@ select:-moz-focusring {
   cursor: default;
   filter: blur(2px); }
 
+input:invalid, select:invalid {
+  outline: 3px solid #EE6C4D !important;
+  color: #EE6C4D; }
+
 /* FORM BTNS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .form-control .required-msg {

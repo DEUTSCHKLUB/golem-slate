@@ -134,6 +134,11 @@ select:-moz-focusring {
   filter: blur(2px);
 }
 
+input:invalid, select:invalid{
+  outline: 3px solid $five !important;
+  color:$five;
+}
+
 
 /* FORM BTNS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

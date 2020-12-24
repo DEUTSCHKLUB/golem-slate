@@ -32,7 +32,7 @@
 				svg.bi(width='16' height='16' fill='currentColor')
 					use(xlink:href='/icons.svg#disc')
 				|Image
-			input#imageSelect.datalist(type="text" list='images' name='imageSelect' placeholder="Enter Image Hash" autocomplete="off")
+			input#imageSelect.datalist(type="text" list='images' name='imageSelect' placeholder="Enter Image Hash" autocomplete="off" pattern="[A-Za-z0-9]+" )
 			datalist#images
 				option(value='cderycvgbhkun')
 					|cderycvgbhkun
@@ -55,6 +55,19 @@
 
 script.
 	(function(w,d){
+
+		//- A little validation message
+		let img = d.querySelector("input#imageSelect");
+		img.oninvalid = function(e) {
+			this.setCustomValidity("");
+			if (!this.validity.valid) {
+				this.setCustomValidity("The image hash you entered is invalid.");
+			}
+		};
+		img.oninput = function(e) {
+			this.setCustomValidity("");
+		};
+
 
 		// config form submit
 		const configForm = d.getElementById("golem-config-form");
