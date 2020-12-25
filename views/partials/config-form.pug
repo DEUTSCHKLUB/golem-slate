@@ -1,3 +1,5 @@
+//- markup
+
 .form-control.flex-auto
 	form(id="golem-config-form" action="/s/run/" method="POST")
 		.form-group
@@ -53,10 +55,13 @@
 					use(xlink:href='/icons.svg#play-fill')
 				|Run
 
+//- JS
+
 script.
 	(function(w,d){
 
-		//- A little validation message
+		//- VALIDATION MESSAGE
+
 		let img = d.querySelector("input#imageSelect");
 		img.oninvalid = function(e) {
 			this.setCustomValidity("");
@@ -69,7 +74,8 @@ script.
 		};
 
 
-		// config form submit
+		// RUN FUNCTIONALITY TO OUTPUT TO TERMINAL
+
 		const configForm = d.getElementById("golem-config-form");
 		configForm.addEventListener('submit', event => {
 

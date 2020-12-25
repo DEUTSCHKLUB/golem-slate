@@ -1,3 +1,5 @@
+//- html
+
 h4.text-two.column-title Files:
 
 // File Upload Field
@@ -11,39 +13,8 @@ label#file-upload-label.drop-label(for='file-upload-field')
 
 .filelist-wrapper
 
+//- JS
+
 script.
-    (function(w,d){
-
-        function getIcon(ext){
-            let icon = "file-earmark";
-            if(/\.png|gif|jpg|jpeg|ico|bmp|svg|tiff/.test(ext)){
-                icon = "file-earmark-binary";
-            }else if(/\.htm|html|ts|css|json|jsx|js/.test(ext)){
-                icon = "file-earmark-code";
-            }
-            let svgclass = `bi-${icon}`; 
-            return svgclass;
-        }
-
-        let ul = document.createElement('ul');
-
-        //- In slate.js, the first route, I explicitely pass the files. It is inherited through the slate.pug file to this partial. neat!
-
-        for ( let file of !{JSON.stringify(files.children)} ) {
-            let li = document.createElement('li'),
-                a = document.createElement("a"),
-                i = document.createElement("i");
-
-            a.textContent = `${file.name}`;
-            a.className = 'file-link';
-            i.className = `${getIcon(file.extension)}`;
-            a.prepend(i);
-            a.setAttribute('href', `/${file.path}`);
-            li.appendChild(a);
-            ul.appendChild(li);
-        }
-        let fileList = document.querySelector(".filelist-wrapper");
-        fileList.innerHTML = "";
-        fileList.appendChild(ul);
-
-    })(window,document);
+    const filesData = !{JSON.stringify(files.children)};
+script(src="/javascripts/files.js")

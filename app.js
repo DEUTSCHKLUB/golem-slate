@@ -6,6 +6,7 @@ const createError = require('http-errors'),
       sassMiddleware = require('node-sass-middleware'),
       bodyParser = require('body-parser'),
       cors = require('cors'),
+      Observer = require('./services/observe');
       // sass processing stuff
       srcPath = __dirname + '/assets/',
       destPath = __dirname + '/public/';
@@ -14,6 +15,7 @@ global.appRoot = require('app-root-path');
 
 let indexRouter = require('./routes/index');
 let slateRouter = require('./routes/slate');
+let filesRouter = require('./routes/files');
 
 var app = express();
 
@@ -45,6 +47,7 @@ app.use('/icons.svg', express.static(__dirname + '/node_modules/bootstrap-icons/
 
 app.use('/', indexRouter);
 app.use('/s', slateRouter);
+app.use('/f', filesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

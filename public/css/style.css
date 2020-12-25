@@ -3084,16 +3084,19 @@ template {
   cursor: pointer;
   border-radius: 5px;
   color: #3D5A80;
-  width: 94%;
+  width: 100%;
   height: 100px;
   border: 1px solid #EE6C4D;
   border-radius: 6px;
   padding: 20px;
   text-align: center;
-  position: relative; }
+  position: relative;
+  transition: all 0.3s ease-out; }
   .drop-label.highlight, .drop-label:hover {
     color: #9FCC2E;
     border-color: #9FCC2E; }
+  .drop-label input {
+    cursor: pointer; }
 
 #file-upload-field {
   position: absolute;
