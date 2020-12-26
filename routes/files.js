@@ -38,14 +38,14 @@ router.post("/upload", function(req, res) {
   // once all the files have been uploaded, send a JSON object back reading the file tree of the uploads
   // this way, in case we want to upload more files, we can just pass back a new scan to grab files
   form.on('end', function() {
-    res.json(tree(form.uploadDir));
+    setTimeout((function() {res.json(tree(form.uploadDir))}), 800);
   }); 
   
   // parse the incoming request containing the form data
   form.parse(req);
 });
 
-/* FILE UPLOAD AND SAVE TO DISK ENDPOINT */
+/* OPEN FILE IN EDITOR ENDPOINT */
 
 router.get("/:file", function(req, res) {
     let p = path.join(fileDir, req.params.file);
@@ -59,8 +59,28 @@ router.get("/:file", function(req, res) {
 
         readStream.pipe(res);
     }else{
-        res.send("Could Not Load File");
+        res.end("Could Not Load File");
     }
+});
+
+/* SAVE FILE FROM EDITOR ENDPOINT */
+
+router.post("/save", function(req, res) {    
+    let f = req.body.file,
+        p = path.join(fileDir, f),
+        content = req.body.content,
+        ws = fs.createWriteStream(p);
+
+    ws.on('error', function(error) {
+        console.log(error);
+        // res.send(`Error: ${error}`);
+    });
+
+    ws.write(content);
+    ws.end();
+
+// respond with file tree data to rebuild list just in case there are changes
+    res.json(tree(fileDir));
 });
 
 module.exports = router;

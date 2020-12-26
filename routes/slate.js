@@ -1,7 +1,6 @@
 const express = require('express'),
       fs = require('fs'),
       path = require('path'),
-      exampleCode = fs.readFileSync('./views/partials/example-code.txt', 'utf8'),
       // ash = require('express-async-handler'),
       fileDir = './files/',
       tree = require("directory-tree"),
@@ -10,7 +9,7 @@ const express = require('express'),
 
 /* New Golpen landing page (no id provided) */
 router.get('/', function(req, res, next) {
-  res.render('slate', { title: 'Golem Slate', code: exampleCode, files: tree(fileDir) });
+  res.render('slate', { title: 'Golem Slate', code: 'Upload files by dragging them in the box to the left. Click the file name in the list to open it in this editor.', files: tree(fileDir) });
 });
 
 /* RUN Form Route */

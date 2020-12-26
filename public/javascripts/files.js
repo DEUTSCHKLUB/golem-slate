@@ -9,19 +9,54 @@ function getIcon(ext){
     return svgclass;
 }
 
+function saveFile(){
+    event.preventDefault();
+    let fts = event.target.dataset.target,
+        reqBody = {
+            "content": window.slates.code.getValue(),
+            "file": fts
+        };
+    fetch(`/f/save/`, {
+        method:'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reqBody)
+    }).then(res => {
+        return res.json();
+    }).then( data => {
+        // Send message to frontend
+        buildFileList(data.children);
+    }).catch(function(error) {
+        console.log('Error', error);
+    });
+}
+
+function createSaveButton(fileToSave){
+    let a = document.createElement("a");
+        a.textContent = 'Save File';
+        a.className = 'btn save-link';
+        a.onclick = saveFile;
+        a.setAttribute('href', '#');
+        a.setAttribute('data-target', `${fileToSave}`);
+        document.querySelector('#editor-container').appendChild(a);
+}
+
 function loadEditFile(){
     event.preventDefault();
-    fetch(`/f/${event.target.dataset.target}`, {
+    let lnk = event.target,
+        fto = event.target.dataset.target;
+    fetch(`/f/${fto}`, {
         method:'get',
     }).then(res => {
         return res.text();
     }).then( text => {
         //- eventually, load this in the editor
         window.slates.code.setValue(text);
-        // figure out this indicator later
-        // e.target.classList.add('open-in-editor');
-    }).catch(function(e) {
-        console.log('Error',e);
+        lnk.classList.add('open-in-editor');
+        createSaveButton(fto);
+    }).catch(function(error) {
+        console.log('Error',error);
     });
 }
 

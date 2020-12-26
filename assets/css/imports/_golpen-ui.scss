@@ -47,6 +47,7 @@
             width:100%;
             height:auto;
             padding:1rem;
+            position: relative;
             @include media-breakpoint-up(xl) {
                 width:auto;
                 height:calc(100% - 60px);

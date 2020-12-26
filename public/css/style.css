@@ -2974,7 +2974,8 @@ template {
     #golem-slate-ui-wrap #golem-slate-container .ui-col {
       width: 100%;
       height: auto;
-      padding: 1rem; }
+      padding: 1rem;
+      position: relative; }
       @media (min-width: 1200px) {
         #golem-slate-ui-wrap #golem-slate-container .ui-col {
           width: auto;
@@ -3347,6 +3348,11 @@ input:invalid, select:invalid {
     border-color: #9FCC2E !important; }
   .btn svg {
     margin-right: .4rem; }
+  .btn.save-link {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 1071; }
 
 .cm-s-golem-slate.CodeMirror {
   background: transparent;

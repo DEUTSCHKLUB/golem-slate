@@ -244,4 +244,10 @@ input:invalid, select:invalid{
     svg{
         margin-right:.4rem;
     }
+    &.save-link{
+      position: absolute;
+      bottom:1rem;
+      right:1rem;
+      z-index:1071;
+    }
 }
