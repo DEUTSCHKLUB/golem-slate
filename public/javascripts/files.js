@@ -9,6 +9,16 @@ function getIcon(ext){
     return svgclass;
 }
 
+function showNotification(text, cl) {
+    let n = document.createElement('div');
+    n.className = `notify notify-${cl}`;
+    n.innerHTML = text;
+    document.querySelector('#editor-container').appendChild(n);
+    setTimeout(() => {
+        document.querySelector('#editor-container').removeChild(n);
+    }, 2500);
+}
+
 function saveFile(){
     event.preventDefault();
     let fts = event.target.dataset.target,
@@ -23,12 +33,14 @@ function saveFile(){
         },
         body: JSON.stringify(reqBody)
     }).then(res => {
-        return res.json();
-    }).then( data => {
+        return res.text();
+    }).then( text => {
         // Send message to frontend
-        buildFileList(data.children);
+        showNotification(text, 'success');
+        // If we need to rebuild the file list, we can...make sure the back end does it too:
+        // buildFileList(data.children);
     }).catch(function(error) {
-        console.log('Error', error);
+        showNotification('Could not save', 'fail');
     });
 }
 
@@ -53,7 +65,7 @@ function loadEditFile(){
     }).then( text => {
         //- eventually, load this in the editor
         window.slates.code.setValue(text);
-        lnk.classList.add('open-in-editor');
+        // lnk.parentNode.classList.add('open-in-editor');
         createSaveButton(fto);
     }).catch(function(error) {
         console.log('Error',error);
@@ -68,7 +80,7 @@ function buildFileList(filesList){
             i = document.createElement("i");
 
         a.textContent = `${file.name}`;
-        a.className = 'file-link';
+        a.className = 'file-link d-block';
         a.onclick = loadEditFile;
         i.className = `${getIcon(file.extension)}`;
         a.prepend(i);

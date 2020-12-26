@@ -1,5 +1,14 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  #golem-slate-ui-wrap.small
+    .container-fluid.px-4.py-4
+      .row.align-items-center.justify-content-center
+        .col-8.col-md-6
+          .logo.mb-3
+            img(src="/images/golem-slate-logo.svg")
+        .col-12(style="text-align:center")
+          h2 Access all the computing power you need
+          p golem SLATE is a code pen for creating requests for distributed computation to be completed by the golem network.
+          a.btn.mt-5(href="/s/")
+            |Create a new SLATE

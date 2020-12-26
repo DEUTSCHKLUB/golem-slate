@@ -1,6 +1,14 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  #golem-slate-ui-wrap.small
+    .container-fluid.px-4.py-4
+      .row.align-items-center.justify-content-center
+        .col-8.col-md-6
+          .logo.mb-3
+            img(src="/images/golem-slate-logo.svg")
+        .col-12(style="text-align:center")
+          h2 Oops. Something went wrong.
+          p Click below to return to safety.
+          a.btn.mt-5(href="/s/")
+            |Back to SLATE

@@ -53,8 +53,14 @@ select:-moz-focusring {
     @include media-breakpoint-up(md){
         flex-direction: row;
         align-items: flex-end;
-        justify-content: flex-end;
+        justify-content: center;
         flex-wrap: nowrap;
+    }
+    @media only screen and (min-width:1440px){
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: flex-end;
+      flex-wrap: nowrap;
     }
     form{
       width:100%;

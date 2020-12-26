@@ -18,6 +18,21 @@
     margin: 5vh auto;
     padding:1rem 1.5rem;
     border-radius: .7rem;
+    &.small{
+        width: 90vw;
+        max-width:500px;
+        max-height: 50vh !important;
+        min-height: auto;
+        position: absolute;
+        top:40%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        @include media-breakpoint-up(xl) {
+            height:40vh !important;
+            min-height:40vh !important;
+            max-height:40vh !important;
+        }
+    }
     &:after{
         content: "";
         position: absolute;
@@ -50,6 +65,9 @@
             position: relative;
             @include media-breakpoint-up(xl) {
                 width:auto;
+                height:calc(100% - 120px);
+            }
+            @media only screen and (min-width:1440px){
                 height:calc(100% - 60px);
             }
             &.closed{
@@ -61,8 +79,11 @@
         #golem-slate-nav{
             width:100%;
             order: 1;
-            @include media-breakpoint-up(xl) {
+            align-items: flex-start;
+            justify-content: center;
+            @media only screen and (min-width:1440px){
                 width:auto;
+                align-items: center;
             }
         }
         .form-control{
@@ -70,13 +91,13 @@
             order: 4;
             @include media-breakpoint-up(xl) {
                 order: 2;
+                align-items: flex-start;
             }
         }
         #golem-slate-filelist{
             display:flex;
             flex-direction:column;
             border-bottom:1px solid $two;
-            // min-height: 40vh;
             order:2;
             @include media-breakpoint-up(xl) {
                 border-bottom:none;
@@ -101,7 +122,7 @@
           }
           #editor-container{
               width:100%;
-              height:100%;
+              height:93%;
           }
       }
       #golem-slate-output{
@@ -118,8 +139,34 @@
             @include media-breakpoint-up(xl) {
                 border-top:none;
                 border-left:1px solid $two;
-                max-width:35%;
+                max-width:30%;
             }
       }
+    }
+}
+
+.notify{
+    position: absolute;
+    bottom: 1rem;
+    left:1rem;
+    transform: translate(0,100%);
+    opacity:0;
+    animation: slideup 0.2s ease-in 0s 1 forwards;
+    padding:.1rem .5rem;
+    border-radius: .2rem;
+    &.notify-success{
+        color:$one;
+        background:$six;
+    }
+    &.notify-fail{
+        color:$one;
+        background:$five;
+    }
+}
+
+@keyframes slideup{
+    to{
+        transform: translate(0,0);
+        opacity:1;
     }
 }

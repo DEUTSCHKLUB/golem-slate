@@ -72,15 +72,15 @@ router.post("/save", function(req, res) {
         ws = fs.createWriteStream(p);
 
     ws.on('error', function(error) {
-        console.log(error);
-        // res.send(`Error: ${error}`);
+        res.send('Could not save file');
     });
 
     ws.write(content);
     ws.end();
 
-// respond with file tree data to rebuild list just in case there are changes
-    res.json(tree(fileDir));
+    res.end('File saved!');
+    // respond with file tree data to rebuild list just in case there are changes
+    // res.json(tree(fileDir));
 });
 
 module.exports = router;

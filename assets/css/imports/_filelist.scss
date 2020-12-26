@@ -11,7 +11,6 @@ $active-file-color:lighten($five, 2%);
         li {
             padding: 7px 10px;
             position: relative;
-            display:flex;
             transition: all .3s ease-out;
             color: $two;
             border-bottom: 1px solid $two;
@@ -34,7 +33,7 @@ $active-file-color:lighten($five, 2%);
             }
             &.open-in-editor{
                 background: $active-file-color;
-                color:$one;
+                color:$four;
                 &:hover {
                     color:$four;
                 }
