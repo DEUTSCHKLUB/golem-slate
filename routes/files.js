@@ -1,7 +1,7 @@
 const express = require('express'),
       fs = require('fs'),
       path = require('path'),
-      fileDir = './files/',
+      fileDir = './pens/pen1/',
       formidable = require('formidable'),
       tree = require("directory-tree"),
       { spawn, exec, execFile } = require('child_process'),

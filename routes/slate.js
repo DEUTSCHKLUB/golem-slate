@@ -2,7 +2,7 @@ const express = require('express'),
       fs = require('fs'),
       path = require('path'),
       // ash = require('express-async-handler'),
-      fileDir = './files/',
+      fileDir = './pens/pen1/',
       tree = require("directory-tree"),
       { spawn, exec, execFile } = require('child_process'),
       router = express.Router();
@@ -23,7 +23,7 @@ router.post('/run', (req, res) => {
 
     imageSelect = imageSelect.replace(/[^a-zA-Z0-9]/g, "");
 
-    const runner = spawn('sh', ['/home/derek/Desktop/golem-alpha3/yajsapi/examples/golem-codepen/disks/runPen.sh', 'diskOne', imageSelect, cpuSelect, ramSelect, discSelect]);
+    const runner = spawn('sh', ['./pens/runPen.sh', 'pen1', imageSelect, cpuSelect, ramSelect, discSelect]);
     runner.stdout.pipe(res, { end: false });
     runner.stderr.pipe(res, { end: false });
     runner.on('close', (code, signal) => {

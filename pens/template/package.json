@@ -1,0 +1,24 @@
+{
+    "name": "golem-codepen",
+    "version": "0.1.0",
+    "description": "Codepen for golem network",
+    "repository": "https://github.com/dComputeCore/golem-codepen",
+    "scripts": {
+        "codepen": "ts-node-script ./codepen_base.ts",
+        "clean": "rimraf node_modules/ yarn.lock || echo 'Project is already clean'"
+    },
+    "author": "Derek Jarvis <Derek@JarvisPowered.com>",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "bluebird": "^3.5.0",
+        "dayjs": "^1.8.31",
+        "ts-node": "^9.0.0",
+        "tsc": "^1.20150623.0",
+        "yajsapi": "^0.2.1",
+        "yarn": "^1.22.10"
+    },
+    "devDependencies": {
+        "tsconfig-paths": "^3.9.0",
+        "typescript": "^3.9.7"
+    }
+}
