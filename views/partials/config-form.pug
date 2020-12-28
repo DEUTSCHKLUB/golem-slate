@@ -1,7 +1,7 @@
 //- markup
-
+//- the action URL needs to be improved!
 .form-control.flex-auto
-	form(id="golem-config-form" action="/s/run/" method="POST")
+	form(id="golem-config-form" action="/s/run/"+global.penSlots[0] method="POST")
 		.form-group
 			label(for="cpuSelect")
 				svg.bi(width='16' height='16' fill='currentColor')

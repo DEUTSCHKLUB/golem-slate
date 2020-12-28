@@ -1,4 +1,6 @@
 (function(w,d){
+    let slateid = window.location.pathname.split("/").pop();
+    console.log(slateid);
 
     //- VALIDATION MESSAGE
 
