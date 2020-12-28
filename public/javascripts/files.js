@@ -1,4 +1,4 @@
-let slateid = console.log(window.location.pathname.split("/").pop());
+const slateid = window.location.pathname.split("/").pop();
 
 function getIcon(ext){
     let icon = "file-earmark";

@@ -1,7 +1,7 @@
 //- markup
 //- the action URL needs to be improved!
 .form-control.flex-auto
-	form(id="golem-config-form" action="/s/run/"+global.penSlots[0] method="POST")
+	form(id="golem-config-form" action="/s/run/" method="POST")
 		.form-group
 			label(for="cpuSelect")
 				svg.bi(width='16' height='16' fill='currentColor')
@@ -34,7 +34,7 @@
 				svg.bi(width='16' height='16' fill='currentColor')
 					use(xlink:href='/icons.svg#disc')
 				|Image
-			input#imageSelect.datalist(type="text" list='images' name='imageSelect' placeholder="Enter Image Hash" autocomplete="off" pattern="[A-Za-z0-9]+" )
+			input#imageSelect.datalist(type="text" list='images' name='imageSelect' placeholder="Enter Image Hash" autocomplete="off" pattern="[A-Za-z0-9]+" value="9a3b5d67b0b27746283cb5f287c13eab1beaa12d92a9f536b747c7ae" )
 			datalist#images
 				option(value='cderycvgbhkun')
 					|cderycvgbhkun
