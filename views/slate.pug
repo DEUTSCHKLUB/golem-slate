@@ -20,6 +20,10 @@ block content
             #golem-slate-editor.ui-col.align-self-stretch
                 #editor-container
             #golem-slate-output.ui-col.align-self-stretch
+                .expand-btn.d-none.d-xl-inline-block
+                    a#expand-output-btn(href="#")
+                        svg.bi(width='20' height='20' fill='currentColor')
+                            use(xlink:href='/icons.svg#arrows-expand')
                 #output-container
 
 block append footer
@@ -27,6 +31,12 @@ block append footer
     script(src="/editor/mode/javascript/javascript.js")
     script.
         (function(w,d){
+            //- expand console window
+            function expandConsole(){
+                d.querySelector('#golem-slate-ui-wrap').classList.toggle("running-pen");
+            }
+            d.querySelector('a#expand-output-btn').addEventListener('click', expandConsole);
+
             w.slates = {};
             const editor = CodeMirror(d.querySelector('#editor-container'), {
                 value: `!{code}`,

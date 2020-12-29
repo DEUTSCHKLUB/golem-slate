@@ -101,7 +101,6 @@
             @include media-breakpoint-up(xl) {
                 border-bottom:none;
                 border-right:1px solid $two;
-                min-width:20%;
                 max-width:20%;
                 order: 3;
             }
@@ -137,6 +136,31 @@
             flex: 1;
             min-height: 40vh;
             order:5;
+            position: relative;
+            .expand-btn{
+                position: absolute;
+                top:50%;
+                left:-28px;
+                transform: translate(0,-50%);
+                display:inline-block;
+                width:28px;
+                height:28px;
+                padding:3px;
+                border:1px solid $two;
+                border-right: none;
+                display: inline-flex;
+                align-items: center;
+                justify-content:flex-start;
+                a{
+                    display:block;
+                    transition: color .5s ease-out;
+                    transform: rotate(90deg);
+                    line-height:0em;
+                    &:hover{
+                        color:$six;
+                    }
+                }
+            }
             #output-container{
                 width:100%;
                 height:100%;
@@ -178,5 +202,17 @@
     to{
         transform: translate(0,0);
         opacity:1;
+    }
+}
+
+// Expand console styles
+@include media-breakpoint-up(xl) {
+    #golem-slate-ui-wrap.running-pen{
+        #golem-slate-editor{
+            max-width:30% !important;
+        }
+        #golem-slate-output{
+            max-width:70% !important;
+        }
     }
 }
