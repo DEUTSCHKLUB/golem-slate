@@ -1,4 +1,6 @@
 (function(w,d){
+    let slateid = window.location.pathname.split("/").pop();
+    console.log(slateid);
 
     //- VALIDATION MESSAGE
 
@@ -17,6 +19,9 @@
     // RUN FUNCTIONALITY TO OUTPUT TO TERMINAL
 
     const configForm = d.getElementById("golem-config-form");
+
+    configForm.action = "/s/run/"+slateid;
+
     configForm.addEventListener('submit', event => {
 
         // Prevent the default form submit
@@ -32,8 +37,11 @@
         }).then(res => {
             const reader = res.body.getReader();
             reader.read().then(function processText({ done, value }) {
-                let receivedText = new TextDecoder().decode(value)
-                slates.output.replaceRange(receivedText, CodeMirror.Pos(slates.output.lastLine()));
+                let receivedText = new TextDecoder().decode(value);
+
+                let cleanedText = receivedText.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
+
+                slates.output.replaceRange(cleanedText, CodeMirror.Pos(slates.output.lastLine()));
 
                 slates.output.scrollTo(0, slates.output.getScrollInfo().height);
                                     

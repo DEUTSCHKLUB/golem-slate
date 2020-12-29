@@ -1,3 +1,5 @@
+const slateid = window.location.pathname.split("/").pop();
+
 function getIcon(ext){
     let icon = "file-earmark";
     if(/\.png|gif|jpg|jpeg|ico|bmp|svg|tiff/.test(ext)){
@@ -26,7 +28,7 @@ function saveFile(){
             "content": window.slates.code.getValue(),
             "file": fts
         };
-    fetch(`/f/save/`, {
+    fetch(`/f/${slateid}/save/`, {
         method:'post',
         headers: {
             'Content-Type': 'application/json',
@@ -58,7 +60,7 @@ function loadEditFile(){
     event.preventDefault();
     let lnk = event.target,
         fto = event.target.dataset.target;
-    fetch(`/f/${fto}`, {
+    fetch(`/f/${slateid}/${fto}`, {
         method:'get',
     }).then(res => {
         return res.text();
@@ -127,7 +129,7 @@ fileInput.onchange = () => {
             formData.append('uploads[]', file, file.name)
         }
         
-        fetch('/f/upload', {
+        fetch(`/f/${slateid}/upload`, {
             method:'POST',
             body:formData	
         }).then(res => {
@@ -140,5 +142,22 @@ fileInput.onchange = () => {
     }
 };
 
-buildFileList(filesData);
+// REFRESH FILES FUNCTIONALITY
 
+function refreshTree(){
+    fetch(`/f/${slateid}/tree`, {
+        method:'get',
+    }).then(res => {
+        return res.json();
+    }).then( data => {
+        buildFileList(data.children);
+    }).catch(function(error) {
+        console.log('Error',error);
+    });
+}
+
+document.querySelector('a#refresh-files-btn').addEventListener('click', refreshTree);
+
+// BUILD INITIAL FILE LIST
+
+buildFileList(filesData);

@@ -6,7 +6,7 @@ sleep 5
 echo "Getting App key"
 export YAGNA_APPKEY=$(yagna app-key create requester)
 echo "Initializing payment"
-yagna payment init -r
+yagna payment init -r --driver=NGNT
 yagna payment status
 echo "Preparing codepen"
 yarn

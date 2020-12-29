@@ -1,7 +1,6 @@
 const express = require('express'),
       fs = require('fs'),
       path = require('path'),
-      fileDir = './pens/pen1/',
       formidable = require('formidable'),
       tree = require("directory-tree"),
       { spawn, exec, execFile } = require('child_process'),
@@ -9,17 +8,35 @@ const express = require('express'),
 
 /* GET CURRENT FILE LIST with a GET request, returns JSON to parse */
 
-router.get("/tree", function(req, res) {
-    res.json(tree(fileDir));
+const excludePaths =  [/lost\+found/, /node_modules/, /init\.sh/, /run\.sh/, /tsconfig\.json/, /yarn\.lock/, /tsconfig\.json/, /package\.json/];
+
+function GetFilePath(req) {
+  let slateid = req.params.slateid;
+  console.log(`Current slate ID: ${slateid}`);
+  
+  let penSlot = global.penHashes[slateid];
+
+  
+  if (penSlot == undefined) { 
+    throw Error("Invalid pen slot!");
+  }
+
+  return `./pens/pen${penSlot}/`;
+}
+
+router.get("/:slateid/tree", function(req, res) {
+  let treeResults = tree(GetFilePath(req), {exclude: excludePaths});
+  // console.log(JSON.stringify(treeResults));
+  res.json(treeResults);
 });
 
 /* FILE UPLOAD AND SAVE TO DISK ENDPOINT */
 
-router.post("/upload", function(req, res) {
+router.post("/:slateid/upload", function(req, res) {
   const form = formidable({ multiples: true });
 
   // store all uploads in the /files directory
-  form.uploadDir = fileDir; 
+  form.uploadDir = GetFilePath(req); 
   
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
@@ -38,7 +55,7 @@ router.post("/upload", function(req, res) {
   // once all the files have been uploaded, send a JSON object back reading the file tree of the uploads
   // this way, in case we want to upload more files, we can just pass back a new scan to grab files
   form.on('end', function() {
-    setTimeout((function() {res.json(tree(form.uploadDir))}), 800);
+    setTimeout((function() {res.json(tree(form.uploadDir, {exclude: excludePaths}))}), 800);
   }); 
   
   // parse the incoming request containing the form data
@@ -47,8 +64,8 @@ router.post("/upload", function(req, res) {
 
 /* OPEN FILE IN EDITOR ENDPOINT */
 
-router.get("/:file", function(req, res) {
-    let p = path.join(fileDir, req.params.file);
+router.get("/:slateid/:file", function(req, res) {
+    let p = path.join(GetFilePath(req), req.params.file);
     if (fs.existsSync(p)) {
 
         let readStream = fs.createReadStream(p);
@@ -65,9 +82,9 @@ router.get("/:file", function(req, res) {
 
 /* SAVE FILE FROM EDITOR ENDPOINT */
 
-router.post("/save", function(req, res) {    
+router.post("/:slateid/save", function(req, res) {    
     let f = req.body.file,
-        p = path.join(fileDir, f),
+        p = path.join(GetFilePath(req), f),
         content = req.body.content,
         ws = fs.createWriteStream(p);
 

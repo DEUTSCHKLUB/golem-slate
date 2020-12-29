@@ -15,5 +15,6 @@ mke2fs -t ext4 -F $diskFile
 mount $diskFile $diskDir
 cp -r ./template/* ./$diskDir/
 #change ownership to current user so it can access them
+echo "Changing ownership: chown -R $SUDO_USER:$SUDO_USER ./$diskDir";
 chown -R $SUDO_USER:$SUDO_USER ./$diskDir
 # docker run -d -it --name=$diskDir --rm -v ${PWD}/$diskDir:/golem/work golem-slate bash -C ./init.sh

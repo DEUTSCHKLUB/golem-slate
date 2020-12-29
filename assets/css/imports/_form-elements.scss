@@ -2,7 +2,7 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 $white: $three;
 $red: $five;
-$bodyColor: $one;
+$bodyColor: $two;
 $borderFormEls: $two;
 $bgFormEls: $bodyColor;
 $bgFormElsFocus: $one;
@@ -113,7 +113,7 @@ select:-moz-focusring {
 }
 
 .form-control ::placeholder {
-  color: lighten($one,10%);
+  color: $three;
   /*Fix opacity issue on Firefox*/
   opacity: 1;
 }
@@ -242,6 +242,8 @@ input:invalid, select:invalid{
     border: 1px solid transparent !important;
     padding: .375rem .75rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    align-items: center;
+    justify-content: center;
     &:hover{
         color: $six !important;
         background-color: $one !important;

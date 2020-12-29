@@ -16,6 +16,8 @@ global.appRoot = require('app-root-path');
 let indexRouter = require('./routes/index');
 let slateRouter = require('./routes/slate');
 let filesRouter = require('./routes/files');
+let testRouter = require('./routes/test');
+
 
 var app = express();
 
@@ -48,14 +50,17 @@ app.use('/icons.svg', express.static(__dirname + '/node_modules/bootstrap-icons/
 app.use('/', indexRouter);
 app.use('/s', slateRouter);
 app.use('/f', filesRouter);
+app.use('/t', testRouter);
 
 // catch 404 and forward to error handler
+// DJ - Is this necessary?
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
 // error handler
 app.use(function(err, req, res, next) {
+  console.log(err);
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -64,5 +69,14 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+global.maxPens = 10;
+
+global.penSlots = {};
+global.penHashes = {};
+
+for (let index = 0; index < global.maxPens; index++) {
+  global.penSlots[index] = "";
+}
 
 module.exports = app;
