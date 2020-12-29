@@ -142,5 +142,22 @@ fileInput.onchange = () => {
     }
 };
 
-buildFileList(filesData);
+// REFRESH FILES FUNCTIONALITY
 
+function refreshTree(){
+    fetch(`/f/${slateid}/tree`, {
+        method:'get',
+    }).then(res => {
+        return res.json();
+    }).then( data => {
+        buildFileList(data.children);
+    }).catch(function(error) {
+        console.log('Error',error);
+    });
+}
+
+document.querySelector('a#refresh-files-btn').addEventListener('click', refreshTree);
+
+// BUILD INITIAL FILE LIST
+
+buildFileList(filesData);

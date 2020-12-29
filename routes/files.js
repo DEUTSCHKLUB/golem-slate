@@ -26,7 +26,7 @@ function GetFilePath(req) {
 
 router.get("/:slateid/tree", function(req, res) {
   let treeResults = tree(GetFilePath(req), {exclude: excludePaths});
-  console.log(JSON.stringify(treeResults));
+  // console.log(JSON.stringify(treeResults));
   res.json(treeResults);
 });
 

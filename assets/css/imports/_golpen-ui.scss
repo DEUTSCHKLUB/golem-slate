@@ -6,7 +6,7 @@
                 linear-gradient(180deg, adjust-hue($one, 7deg), rgba(0,255,0,0) 70.71%),
                 linear-gradient(157deg, adjust-hue($five, -15deg), rgba(0,255,255,0) 50.71%),
                 linear-gradient(157deg, rgba($six,0.6), rgba(0,255,255,0) 60.71%),
-                linear-gradient(to top, rgba($two, 0.5) 0%, rgba($two, 0.3) 5%, rgba($one, 0) 100%);
+                linear-gradient(to top, rgba($two-dark, 0.5) 0%, rgba($two-dark, 0.3) 5%, rgba($one, 0) 100%);
     border-bottom: 10px solid $one;
     width:90vw;
     height:auto;
@@ -21,16 +21,15 @@
     &.small{
         width: 90vw;
         max-width:500px;
-        max-height: 50vh !important;
+        max-height: 60vh !important;
         min-height: auto;
         position: absolute;
         top:40%;
         left:50%;
         transform: translate(-50%,-50%);
         @include media-breakpoint-up(xl) {
-            height:40vh !important;
-            min-height:40vh !important;
-            max-height:40vh !important;
+            max-height:50vh !important;
+            min-height:50vh !important;
         }
     }
     &:after{
@@ -109,6 +108,8 @@
             transition: flex .8s $transition-base;
             #filelist{
                 height: 100%;
+                display:inline-flex;
+                flex-direction:column;
             }
         }
       #golem-slate-editor{
@@ -123,6 +124,10 @@
           #editor-container{
               width:100%;
               height:93%;
+              padding-bottom:50px;
+              @include media-breakpoint-up(xl) {
+                padding-bottom:0px;
+              }
           }
       }
       #golem-slate-output{
@@ -135,6 +140,11 @@
             #output-container{
                 width:100%;
                 height:100%;
+                max-height: 50vh;
+                overflow: scroll;
+                @include media-breakpoint-up(xl) {
+                    max-height:100%;
+                }
             }
             @include media-breakpoint-up(xl) {
                 border-top:none;
