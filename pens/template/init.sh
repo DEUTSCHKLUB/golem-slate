@@ -10,7 +10,10 @@ yagna payment init -r --driver=NGNT
 yagna payment status
 echo "Preparing codepen"
 yarn
-echo "Sleeping for 90 minutes to keep docker running"
-sleep 90m
+# Removing 90 minute limit
+#echo "Sleeping for 90 minutes to keep docker running"
+#sleep 90m
+# Run indefinitely
+tail -f /dev/null
 #echo "Running codepen"
 #yarn codepen

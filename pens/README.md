@@ -23,7 +23,7 @@ You will need to build the provided Docker image so that it is available in your
 * Build the docker image:  
     > docker build -t golem-slate Docker
 * Create 10 pens 
-    > for t in {0..9}; do sudo ./createPen.sh pen$t; done
+    > sudo ./create.sh
 * Start 10 pens 
     > for t in {0..9}; do ./startPen.sh pen$t; done
 * Run the front-end web application
@@ -31,7 +31,7 @@ You will need to build the provided Docker image so that it is available in your
 ## Tear-down ##
 * cd into the pens directory
 * Remove 10 pens
-    > for t in {0..9}; do sudo ./removePen.sh pen$t; done
+    > sudo ./remove.sh
 
 ## Commands ##
 ### createPen.sh pen0 ###
