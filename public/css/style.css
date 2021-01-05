@@ -3215,13 +3215,15 @@ body {
     font-size: .8rem;
     display: flex;
     flex-wrap: wrap;
-    align-items: center; }
+    align-items: center;
+    justify-content: center; }
     @media (min-width: 992px) {
       #golem-slate-nav .logo {
-        flex-wrap: wrap; } }
+        flex-wrap: nowrap;
+        justify-content: flex-start; } }
     #golem-slate-nav .logo img {
       display: inline-block;
-      margin: 0 2rem .8rem 0;
+      margin: 0 auto .8rem;
       height: 30px;
       width: auto; }
       @media (min-width: 992px) {
