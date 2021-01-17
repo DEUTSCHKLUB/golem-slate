@@ -12,7 +12,7 @@ function getIcon(ext){
 }
 
 function checkFileType(ext){
-    return /\.htm|html|ts|css|json|jsx|js|txt/.test(ext);
+    return /\.htm|html|ts|css|json|jsx|js|txt|log/.test(ext);
 }
 
 function showNotification(text, cl) {

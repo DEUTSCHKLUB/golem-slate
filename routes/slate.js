@@ -86,7 +86,7 @@ router.get('/stop/:slateid', (req, res, next) => {
       res.redirect("/");
     }
 
-    const runner = spawn('sh', ['./pens/stopPen.sh', `pen${penSlot}`]);
+    const runner = spawn('sh', ['./pens/restartPen.sh', `pen${penSlot}`]);
     runner.stdout.pipe(res, { end: false });
     runner.stderr.pipe(res, { end: false });
     runner.on('close', (code, signal) => {
