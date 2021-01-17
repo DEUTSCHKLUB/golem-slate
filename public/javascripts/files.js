@@ -4,11 +4,15 @@ function getIcon(ext){
     let icon = "file-earmark";
     if(/\.png|gif|jpg|jpeg|ico|bmp|svg|tiff/.test(ext)){
         icon = "file-earmark-binary";
-    }else if(/\.htm|html|ts|css|json|jsx|js/.test(ext)){
+    }else if(/\.htm|html|ts|css|json|jsx|js|txt/.test(ext)){
         icon = "file-earmark-code";
     }
     let svgclass = `bi-${icon}`; 
     return svgclass;
+}
+
+function checkFileType(ext){
+    return /\.htm|html|ts|css|json|jsx|js|txt/.test(ext);
 }
 
 function showNotification(text, cl) {
@@ -63,14 +67,19 @@ function loadEditFile(){
     fetch(`/f/${slateid}/${fto}`, {
         method:'get',
     }).then(res => {
-        return res.text();
-    }).then( text => {
-        //- eventually, load this in the editor
-        window.slates.code.setValue(text);
-        // lnk.parentNode.classList.add('open-in-editor');
-        createSaveButton(fto);
-    }).catch(function(error) {
-        console.log('Error',error);
+        const contentType = res.headers.get("content-type");
+        if (contentType) {
+            return res;
+        } else {
+            return res.text().then(text => {
+                // this is text, do something with it
+                window.slates.code.setValue(text);
+                // lnk.parentNode.classList.add('open-in-editor');
+                createSaveButton(fto);
+            }).catch(function(error) {
+                console.log('Error',error);
+            });
+        }
     });
 }
 
@@ -83,10 +92,10 @@ function buildFileList(filesList){
 
         a.textContent = `${file.name}`;
         a.className = 'file-link d-block';
-        a.onclick = loadEditFile;
+        a.onclick = checkFileType(file.extension) ? loadEditFile : '';
         i.className = `${getIcon(file.extension)}`;
         a.prepend(i);
-        a.setAttribute('href', '#');
+        a.setAttribute('href', checkFileType(file.extension) ? '#': `/f/${slateid}/download/${file.name}`);
         a.setAttribute('data-target', `${file.name}`);
         li.appendChild(a);
         ul.appendChild(li);

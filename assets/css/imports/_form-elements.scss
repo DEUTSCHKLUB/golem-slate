@@ -76,6 +76,13 @@ select:-moz-focusring {
         border-bottom:none;
         margin:.5rem 0;
         // width:100%;
+        &:last-of-type{
+          margin: 0 0 .5rem 0 !important;
+          padding: 0 !important;
+          @include media-breakpoint-up(lg){
+            margin:0 .4rem 0 0 !important;
+          }
+        }
         @include media-breakpoint-up(lg){
           display: inline-flex;
           margin:0 .4rem 0 0;
@@ -136,8 +143,9 @@ select:-moz-focusring {
 }
 
 .form-control *:disabled {
+  opacity: 0.3;
   cursor: default;
-  filter: blur(2px);
+  pointer-events: none;
 }
 
 input:invalid, select:invalid{
@@ -244,13 +252,25 @@ input:invalid, select:invalid{
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     align-items: center;
     justify-content: center;
+    margin: 0 3px 0 0;
+    &:last-of-type{
+      margin:0 !important;
+    }
+    &.red{
+      background-color:$five !important;
+      &:hover{
+        color: $five !important;
+        background-color: $one !important;
+        border-color: $five !important;
+      }
+    }
     &:hover{
         color: $six !important;
         background-color: $one !important;
         border-color: $six !important;
     }
     svg{
-        margin-right:.4rem;
+        // margin-right:.4rem;
     }
     &.save-link{
       position: absolute;

@@ -1,6 +1,11 @@
 (function(w,d){
-    let slateid = window.location.pathname.split("/").pop();
-    console.log(slateid);
+    const slateid = window.location.pathname.split("/").pop(),
+          stopBTN = d.getElementById("stopPen"),
+          resetBTN = d.getElementById("resetPen"),
+          configForm = d.getElementById("golem-config-form"),
+          runBTN = d.getElementById("submitPen");
+
+    // console.log(slateid);
 
     //- VALIDATION MESSAGE
 
@@ -18,14 +23,16 @@
 
     // RUN FUNCTIONALITY TO OUTPUT TO TERMINAL
 
-    const configForm = d.getElementById("golem-config-form");
-
     configForm.action = "/s/run/"+slateid;
 
     configForm.addEventListener('submit', event => {
 
         // Prevent the default form submit
         event.preventDefault();
+
+        // toggle disabled
+        stopBTN.removeAttribute("disabled");
+        runBTN.setAttribute('disabled','disabled');
 
         // Store reference to form to make later code easier to read
         const form = event.target;	
@@ -47,6 +54,72 @@
                                     
                 if (done) {
                     console.log("Stream complete");
+                    return;
+                }
+                return reader.read().then(processText);
+            });
+        }).catch(err => {
+            console.log('Error outputting stream: ' + err);
+        });
+    });
+
+    // STOP FUNCTIONALITY TO OUTPUT TO TERMINAL
+
+    stopBTN.addEventListener('click', event => {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        // toggle disabled
+        stopBTN.setAttribute('disabled','disabled');
+        runBTN.removeAttribute("disabled");
+        
+        fetch("/s/stop/" + slateid, {
+            method: 'GET',
+        }).then(res => {
+            const reader = res.body.getReader();
+            reader.read().then(function processText({ done, value }) {
+                let receivedText = new TextDecoder().decode(value);
+
+                let cleanedText = receivedText.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
+
+                slates.output.replaceRange(cleanedText, CodeMirror.Pos(slates.output.lastLine()));
+
+                slates.output.scrollTo(0, slates.output.getScrollInfo().height);
+                                    
+                if (done) {
+                    console.log("Stop complete");
+                    return;
+                }
+                return reader.read().then(processText);
+            });
+        }).catch(err => {
+            console.log('Error outputting stream: ' + err);
+        });
+    });
+
+        // STOP FUNCTIONALITY TO OUTPUT TO TERMINAL
+
+    resetBTN.addEventListener('click', event => {
+
+        event.preventDefault();
+        event.stopPropagation();
+        
+        fetch("/s/reset/" + slateid, {
+            method: 'GET',
+        }).then(res => {
+            const reader = res.body.getReader();
+            reader.read().then(function processText({ done, value }) {
+                let receivedText = new TextDecoder().decode(value);
+
+                let cleanedText = receivedText.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
+
+                slates.output.replaceRange(cleanedText, CodeMirror.Pos(slates.output.lastLine()));
+
+                slates.output.scrollTo(0, slates.output.getScrollInfo().height);
+                                    
+                if (done) {
+                    console.log("Reset complete");
                     return;
                 }
                 return reader.read().then(processText);

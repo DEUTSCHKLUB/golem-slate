@@ -4,7 +4,9 @@ const express = require('express'),
       formidable = require('formidable'),
       tree = require("directory-tree"),
       { spawn, exec, execFile } = require('child_process'),
+      isTextPath = require('is-text-path'),
       router = express.Router();
+      
 
 /* GET CURRENT FILE LIST with a GET request, returns JSON to parse */
 
@@ -67,7 +69,6 @@ router.post("/:slateid/upload", function(req, res) {
 router.get("/:slateid/:file", function(req, res) {
     let p = path.join(GetFilePath(req), req.params.file);
     if (fs.existsSync(p)) {
-
         let readStream = fs.createReadStream(p);
 
         readStream.on('error', function(error) {
@@ -76,8 +77,28 @@ router.get("/:slateid/:file", function(req, res) {
 
         readStream.pipe(res);
     }else{
-        res.end("Could Not Load File");
+        res.end(`Could Not Load ${req.params.file}`);
     }
+});
+
+/* DOWNLOAD ENDPOINT */
+
+router.get("/:slateid/download/:file", async function(req, res, next) {
+  let p = path.join(GetFilePath(req), req.params.file);
+  try {
+    res.download(p, req.params.file, (err) => {
+      if (err) {
+        res.status(500).send({
+          message: "Could not download the file. " + err,
+        });
+      }
+    });
+
+  } catch (error) {
+    res.status(500).send({
+      message: "Could not download the file. " + err,
+    });
+  }
 });
 
 /* SAVE FILE FROM EDITOR ENDPOINT */

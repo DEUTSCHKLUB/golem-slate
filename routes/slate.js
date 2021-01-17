@@ -69,4 +69,64 @@ router.post('/run/:slateid', (req, res, next) => {
     
 });
 
+/* STOP Pen Route */
+
+router.get('/stop/:slateid', (req, res, next) => {
+  try {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader("Content-Type", "text/event-stream");
+
+    let slateid = req.params.slateid;
+    console.log(`Stopping slate ID: ${slateid}`);
+    
+    let penSlot = global.penHashes[slateid];
+
+    if (penSlot == undefined) { 
+      console.log("invalid slate id");
+      res.redirect("/");
+    }
+
+    const runner = spawn('sh', ['./pens/stopPen.sh', `pen${penSlot}`]);
+    runner.stdout.pipe(res, { end: false });
+    runner.stderr.pipe(res, { end: false });
+    runner.on('close', (code, signal) => {
+      console.log(`child process exited with code ${code} and signal ${signal}`);
+    });
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+    
+});
+
+/* RESET Pen Route */
+
+router.get('/reset/:slateid', (req, res, next) => {
+  try {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader("Content-Type", "text/event-stream");
+
+    let slateid = req.params.slateid;
+    console.log(`Resetting slate ID: ${slateid}`);
+    
+    let penSlot = global.penHashes[slateid];
+
+    if (penSlot == undefined) { 
+      console.log("invalid slate id");
+      res.redirect("/");
+    }
+
+    const runner = spawn('sh', ['./pens/resetPen.sh', `pen${penSlot}`]);
+    runner.stdout.pipe(res, { end: false });
+    runner.stderr.pipe(res, { end: false });
+    runner.on('close', (code, signal) => {
+      console.log(`child process exited with code ${code} and signal ${signal}`);
+    });
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+    
+});
+
 module.exports = router;
