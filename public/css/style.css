@@ -3448,6 +3448,10 @@ input:invalid, select:invalid {
   align-items: center;
   justify-content: center;
   margin: 0 3px 0 0; }
+  .btn:disabled {
+    background: #454545 !important;
+    color: #537aad !important;
+    opacity: .5 !important; }
   .btn:last-of-type {
     margin: 0 !important; }
   .btn.red {
@@ -3456,6 +3460,10 @@ input:invalid, select:invalid {
       color: #EE6C4D !important;
       background-color: #293241 !important;
       border-color: #EE6C4D !important; }
+    .btn.red:disabled {
+      background: #454545 !important;
+      color: #537aad !important;
+      opacity: .5 !important; }
   .btn:hover {
     color: #9FCC2E !important;
     background-color: #293241 !important;

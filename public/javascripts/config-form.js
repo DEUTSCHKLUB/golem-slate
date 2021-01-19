@@ -54,6 +54,8 @@
                                     
                 if (done) {
                     console.log("Stream complete");
+                    stopBTN.removeAttribute("disabled");
+                    runBTN.setAttribute('disabled','disabled');
                     return;
                 }
                 return reader.read().then(processText);

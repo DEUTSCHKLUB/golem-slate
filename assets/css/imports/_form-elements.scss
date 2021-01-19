@@ -253,6 +253,11 @@ input:invalid, select:invalid{
     align-items: center;
     justify-content: center;
     margin: 0 3px 0 0;
+    &:disabled{
+      background: #454545 !important;
+      color:$two !important;
+      opacity: .5 !important;
+    }
     &:last-of-type{
       margin:0 !important;
     }
@@ -262,6 +267,11 @@ input:invalid, select:invalid{
         color: $five !important;
         background-color: $one !important;
         border-color: $five !important;
+      }
+      &:disabled{
+        background: #454545 !important;
+        color:$two !important;
+        opacity: .5 !important;
       }
     }
     &:hover{
