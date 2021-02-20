@@ -1,16 +1,19 @@
 import path from "path";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
-import { Engine, Task, utils, vm, WorkContext } from "yajsapi";
+import { Executor, Task, utils, vm, WorkContext } from "yajsapi";
 
 dayjs.extend(duration);
 
 const { asyncWith, logUtils, range } = utils;
 
-export class CodePenParams {
-  timeout: number = dayjs.duration({ minutes: 15 }).asMilliseconds();
+// Update these variables to set your timeout and worker count
+let timeoutMilliseconds: number = dayjs.duration({ minutes: 15 }).asMilliseconds();
+let workerCount: number = 6;
 
-  workers: number = 6;
+export class CodePenParams {
+  timeout: number = timeoutMilliseconds
+  workers: number = workerCount;
 
   taskGetter = function getTasks(): any[] {
     return range(0, 60, 10);
@@ -57,11 +60,11 @@ export class CodePenParams {
         `/golem/output/out${frame.toString().padStart(4, "0")}.png`,
         path.join(__dirname, `./output_${frame}.png`)
       );
-      yield ctx.commit();
+      yield ctx.commit({timeout: timeoutMilliseconds});
       // TODO: Check
       // job results are valid // and reject by:
       // task.reject_task(msg = 'invalid file')
-      task.accept_task(output_file);
+      task.accept_result(output_file);
     }
 
     ctx.log("no more frames to render");

@@ -1,8 +1,8 @@
 {
-    "name": "golem-codepen",
-    "version": "0.1.0",
+    "name": "golem-slate",
+    "version": "0.1.1",
     "description": "Codepen for golem network",
-    "repository": "https://github.com/dComputeCore/golem-codepen",
+    "repository": "https://github.com/DEUTSCHKLUB/golem-slate",
     "scripts": {
         "codepen": "ts-node-script ./codepen_base.ts",
         "clean": "rimraf node_modules/ yarn.lock || echo 'Project is already clean'"
@@ -14,7 +14,7 @@
         "dayjs": "^1.8.31",
         "ts-node": "^9.0.0",
         "tsc": "^1.20150623.0",
-        "yajsapi": "^0.2.1",
+        "yajsapi": "^0.3.0",
         "yarn": "^1.22.10"
     },
     "devDependencies": {
