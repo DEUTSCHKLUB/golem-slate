@@ -2931,6 +2931,62 @@ body {
       border-radius: 20px;
       border: 3px solid #98C1D9; }
 
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: none;
+  overflow: auto;
+  background-color: #000000;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9999; }
+
+.modal-window {
+  position: relative;
+  background-color: #293241;
+  background-image: linear-gradient(90deg, rgba(31, 38, 49, 0.8), rgba(255, 0, 0, 0) 80%), linear-gradient(180deg, #292f41, rgba(0, 255, 0, 0) 70.71%), linear-gradient(157deg, #ee4d56, rgba(0, 255, 255, 0) 50.71%), linear-gradient(157deg, rgba(159, 204, 46, 0.6), rgba(0, 255, 255, 0) 60.71%), linear-gradient(to top, rgba(61, 90, 128, 0.5) 0%, rgba(61, 90, 128, 0.3) 5%, rgba(41, 50, 65, 0) 100%);
+  border-bottom: 10px solid #000;
+  width: 50%;
+  margin: 5vh auto;
+  padding: 1.5rem;
+  box-sizing: border-box; }
+  .modal-window .modal-content {
+    width: 100%;
+    height: auto;
+    overflow: auto; }
+    .modal-window .modal-content img {
+      width: 100%;
+      max-width: 100%;
+      height: auto; }
+
+.modal-window.small {
+  width: 30%; }
+
+.modal-window.large {
+  width: 75%; }
+
+.close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #98C1D9;
+  height: 30px;
+  width: 30px;
+  font-family: monospace;
+  font-size: 30px;
+  line-height: 30px;
+  text-align: center; }
+
+.close:hover,
+.close:focus {
+  color: #EE6C4D;
+  cursor: pointer; }
+
+.open {
+  display: block; }
+
 #golem-slate-ui-wrap {
   position: relative;
   background-color: #293241;
@@ -2943,7 +2999,7 @@ body {
   margin: 5vh auto;
   padding: 1rem 1.5rem;
   border-radius: .7rem; }
-  @media (min-width: 1200px) {
+  @media only screen and (min-width: 1440px) {
     #golem-slate-ui-wrap {
       height: 90vh; } }
   #golem-slate-ui-wrap.small {
@@ -2955,7 +3011,7 @@ body {
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%); }
-    @media (min-width: 1200px) {
+    @media only screen and (min-width: 1440px) {
       #golem-slate-ui-wrap.small {
         max-height: 50vh !important;
         min-height: 50vh !important; } }
@@ -2979,7 +3035,7 @@ body {
     width: 100%;
     height: 100%;
     flex: 1; }
-    @media (min-width: 1200px) {
+    @media only screen and (min-width: 1440px) {
       #golem-slate-ui-wrap #golem-slate-container {
         flex-direction: row;
         flex-wrap: wrap; } }
@@ -2988,7 +3044,7 @@ body {
       height: auto;
       padding: 1rem;
       position: relative; }
-      @media (min-width: 1200px) {
+      @media only screen and (min-width: 1440px) {
         #golem-slate-ui-wrap #golem-slate-container .ui-col {
           width: auto;
           height: calc(100% - 120px); } }
@@ -3010,7 +3066,7 @@ body {
     #golem-slate-ui-wrap #golem-slate-container .form-control {
       flex: 1;
       order: 4; }
-      @media (min-width: 1200px) {
+      @media only screen and (min-width: 1440px) {
         #golem-slate-ui-wrap #golem-slate-container .form-control {
           order: 2;
           align-items: flex-start; } }
@@ -3020,11 +3076,11 @@ body {
       border-bottom: 1px solid #537aad;
       order: 2;
       transition: flex 0.8s cubic-bezier(0.49, -0.32, 0.25, 1.23); }
-      @media (min-width: 1200px) {
+      @media only screen and (min-width: 1440px) {
         #golem-slate-ui-wrap #golem-slate-container #golem-slate-filelist {
           border-bottom: none;
           border-right: 1px solid #537aad;
-          max-width: 20%;
+          width: 25%;
           order: 3; } }
       #golem-slate-ui-wrap #golem-slate-container #golem-slate-filelist #filelist {
         height: 100%;
@@ -3034,8 +3090,9 @@ body {
       flex: 1;
       min-height: 40vh;
       order: 3;
-      margin: 0 0 1rem 0; }
-      @media (min-width: 1200px) {
+      margin: 0 0 1rem 0;
+      padding-right: 2.2rem; }
+      @media only screen and (min-width: 1440px) {
         #golem-slate-ui-wrap #golem-slate-container #golem-slate-editor {
           order: 4;
           margin: 0; } }
@@ -3043,7 +3100,7 @@ body {
         width: 100%;
         height: 93%;
         padding-bottom: 50px; }
-        @media (min-width: 1200px) {
+        @media only screen and (min-width: 1440px) {
           #golem-slate-ui-wrap #golem-slate-container #golem-slate-editor #editor-container {
             padding-bottom: 0px; } }
     #golem-slate-ui-wrap #golem-slate-container #golem-slate-output {
@@ -3063,10 +3120,12 @@ body {
         height: 28px;
         padding: 3px;
         border: 1px solid #537aad;
-        border-right: none;
-        display: inline-flex;
         align-items: center;
-        justify-content: flex-start; }
+        justify-content: flex-start;
+        display: none; }
+        @media only screen and (min-width: 1440px) {
+          #golem-slate-ui-wrap #golem-slate-container #golem-slate-output .expand-btn {
+            display: inline-flex !important; } }
         #golem-slate-ui-wrap #golem-slate-container #golem-slate-output .expand-btn a {
           display: block;
           transition: color .5s ease-out;
@@ -3076,17 +3135,18 @@ body {
             color: #9FCC2E; }
       #golem-slate-ui-wrap #golem-slate-container #golem-slate-output #output-container {
         width: 100%;
-        height: 100%;
+        height: 50vh;
         max-height: 50vh;
-        overflow: scroll; }
-        @media (min-width: 1200px) {
+        overflow: auto; }
+        @media only screen and (min-width: 1440px) {
           #golem-slate-ui-wrap #golem-slate-container #golem-slate-output #output-container {
+            height: 100%;
             max-height: 100%; } }
-      @media (min-width: 1200px) {
+      @media only screen and (min-width: 1440px) {
         #golem-slate-ui-wrap #golem-slate-container #golem-slate-output {
           border-top: none;
           border-left: 1px solid #537aad;
-          max-width: 30%; } }
+          max-width: 25%; } }
 
 .notify {
   position: absolute;
@@ -3109,11 +3169,27 @@ body {
     transform: translate(0, 0);
     opacity: 1; } }
 
-@media (min-width: 1200px) {
-  #golem-slate-ui-wrap.running-pen #golem-slate-editor {
-    max-width: 30% !important; }
-  #golem-slate-ui-wrap.running-pen #golem-slate-output {
-    max-width: 70% !important; } }
+@media only screen and (min-width: 1440px) {
+  #golem-slate-ui-wrap.running-pen {
+    position: relative; }
+    #golem-slate-ui-wrap.running-pen #golem-slate-editor {
+      max-width: 80% !important;
+      width: 80% !important;
+      pointer-events: none;
+      opacity: 0;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      z-index: 0; }
+    #golem-slate-ui-wrap.running-pen #golem-slate-output {
+      max-width: 75% !important;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 100;
+      padding-left: 2.2rem; }
+      #golem-slate-ui-wrap.running-pen #golem-slate-output .expand-btn {
+        left: 0px !important; } }
 
 .refresh-wrap {
   margin: 0 0 20px; }
@@ -3123,9 +3199,9 @@ body {
   max-width: 100%;
   display: inline-flex;
   flex: 1;
-  overflow: scroll;
+  overflow: auto;
   max-height: 200px; }
-  @media (min-width: 1200px) {
+  @media only screen and (min-width: 1440px) {
     .filelist-wrapper {
       max-height: 100%; } }
   .filelist-wrapper ul {

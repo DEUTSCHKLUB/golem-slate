@@ -6,8 +6,8 @@ const createError = require('http-errors'),
       sassMiddleware = require('node-sass-middleware'),
       bodyParser = require('body-parser'),
       cors = require('cors'),
-      Observer = require('./services/observe');
-      // sass processing stuff
+      favicon = require('serve-favicon'),
+      Observer = require('./services/observe'),
       srcPath = __dirname + '/assets/',
       destPath = __dirname + '/public/';
 
@@ -20,6 +20,7 @@ let testRouter = require('./routes/test');
 
 
 var app = express();
+app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.png')));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

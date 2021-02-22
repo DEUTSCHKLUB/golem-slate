@@ -8,9 +8,9 @@ $active-file-color:lighten($five, 2%);
     max-width: 100%;
     display:inline-flex;
     flex: 1;
-    overflow:scroll;
+    overflow:auto;
     max-height:200px;
-    @include media-breakpoint-up(xl) {
+    @media only screen and (min-width:1440px) {
         max-height:100%;
     }
     ul {

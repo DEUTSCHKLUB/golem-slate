@@ -1,18 +1,23 @@
+// const { Modal } = require("bootstrap");
+
 const slateid = window.location.pathname.split("/").pop();
 
-function getIcon(ext){
-    let icon = "file-earmark";
-    if(/\.png|gif|jpg|jpeg|ico|bmp|svg|tiff/.test(ext)){
-        icon = "file-earmark-binary";
-    }else if(/\.htm|html|ts|css|json|jsx|js|txt/.test(ext)){
-        icon = "file-earmark-code";
+function checkFileType(f){
+    let action = {
+        icon:"file-earmark",
+        hr:`/f/${slateid}/download/${f.name}`,
+        oc:''
+    };
+    if(/\.png|gif|jpg|jpeg|ico|bmp|svg|tiff/.test(f.extension)){
+        action.icon = icon = "file-earmark-binary";
+        action.hr = "#";
+        action.oc = loadImageFile;
+    }else if(/\.htm|html|ts|css|json|jsx|js|txt|log/.test(f.extension)){
+        action.icon = "file-earmark-code";
+        action.hr = "#";
+        action.oc = loadEditFile;
     }
-    let svgclass = `bi-${icon}`; 
-    return svgclass;
-}
-
-function checkFileType(ext){
-    return /\.htm|html|ts|css|json|jsx|js|txt|log/.test(ext);
+    return action;
 }
 
 function showNotification(text, cl) {
@@ -83,19 +88,38 @@ function loadEditFile(){
     });
 }
 
+function loadImageFile(){
+    event.preventDefault();
+    let lnk = event.target,
+        fto = event.target.dataset.target,
+        newimage = document.createElement('img');
+    fetch(`/f/${slateid}/image/${fto}`, {
+        method:'get',
+    }).then(response => response.blob())
+        .then(images => {
+        // Then create a local URL for that image and print it 
+        outside = URL.createObjectURL(images);
+        newimage.src = outside;
+        window.modal.querySelector(".modal-content").innerHTML = "";
+        window.modal.querySelector(".modal-content").appendChild(newimage);
+        window.modal.classList.add("open");
+    });
+}
+
 function buildFileList(filesList){
     let ul = document.createElement('ul');
     for ( let file of filesList ) {
         let li = document.createElement('li'),
             a = document.createElement("a"),
-            i = document.createElement("i");
+            i = document.createElement("i"),
+            attrs = checkFileType(file);
 
         a.textContent = `${file.name}`;
         a.className = 'file-link d-block';
-        a.onclick = checkFileType(file.extension) ? loadEditFile : '';
-        i.className = `${getIcon(file.extension)}`;
+        i.className = `bi bi-${attrs.icon}`;
         a.prepend(i);
-        a.setAttribute('href', checkFileType(file.extension) ? '#': `/f/${slateid}/download/${file.name}`);
+        a.onclick = attrs.oc;
+        a.setAttribute('href', attrs.hr);
         a.setAttribute('data-target', `${file.name}`);
         li.appendChild(a);
         ul.appendChild(li);

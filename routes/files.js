@@ -96,7 +96,28 @@ router.get("/:slateid/download/:file", async function(req, res, next) {
 
   } catch (error) {
     res.status(500).send({
-      message: "Could not download the file. " + err,
+      message: "Could not download the file. " + error,
+    });
+  }
+});
+
+/* SEND IMAGES ENDPOINT */
+
+router.get("/:slateid/image/:file", async function(req, res, next) {
+  let p = path.join(GetFilePath(req), req.params.file);
+  console.log(p);
+  try {
+    res.sendFile(p,{"root": __dirname.substring(0, __dirname.indexOf("/routes"))}, (err) => {
+      if (err) {
+        res.status(500).send({
+          message: "Error sending file. " + err,
+        });
+      }
+    });
+
+  } catch (error) {
+    res.status(500).send({
+      message: "Could not send the file. " + error,
     });
   }
 });

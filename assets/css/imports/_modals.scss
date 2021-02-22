@@ -1,0 +1,69 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: none;
+    overflow: auto;
+    background-color: #000000;
+    background-color: rgba($black, 0.6);
+    z-index: 9999;
+}
+
+.modal-window {
+    position: relative;
+    background-color: $one;
+    background-image: linear-gradient(90deg, rgba(darken($one, 5%),0.8), rgba(255,0,0,0) 80%),
+                linear-gradient(180deg, adjust-hue($one, 7deg), rgba(0,255,0,0) 70.71%),
+                linear-gradient(157deg, adjust-hue($five, -15deg), rgba(0,255,255,0) 50.71%),
+                linear-gradient(157deg, rgba($six,0.6), rgba(0,255,255,0) 60.71%),
+                linear-gradient(to top, rgba($two-dark, 0.5) 0%, rgba($two-dark, 0.3) 5%, rgba($one, 0) 100%);
+    border-bottom: 10px solid $black;
+    // box-shadow: 0rem 2rem 20px -15px rgba($one,.5);
+    width: 50%;
+    margin: 5vh auto;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    .modal-content{
+        width: 100%;
+        height: auto;
+        overflow: auto;
+        img{
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+        }
+    }
+}
+
+.modal-window.small {
+    width: 30%;
+}
+
+.modal-window.large {
+    width: 75%;
+}
+
+.close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: $three;
+    height: 30px;
+    width: 30px;
+    font-family: monospace;
+    font-size: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.close:hover,
+.close:focus {
+    color: $five;
+    cursor: pointer;
+}
+
+.open {
+    display: block;
+}

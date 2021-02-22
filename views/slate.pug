@@ -20,15 +20,23 @@ block content
             #golem-slate-editor.ui-col.align-self-stretch
                 #editor-container
             #golem-slate-output.ui-col.align-self-stretch
-                .expand-btn.d-none.d-xl-inline-block
+                .expand-btn.d-none
                     a#expand-output-btn(href="#")
                         svg.bi(width='20' height='20' fill='currentColor')
                             use(xlink:href='/icons.svg#arrows-expand')
                 #output-container
+    #main-modal.modal
+        .modal-window.large
+            span.close(data-dismiss="modal")
+                svg.bi(width='20' height='20' fill='currentColor' style="pointer-events:none;")
+                    use(xlink:href='/icons.svg#x-circle')
+            .modal-content
+                h3 Some content here
 
 block append footer
     script(src="/editor/lib/codemirror.js")
     script(src="/editor/mode/javascript/javascript.js")
+    script(src="/javascripts/modal.js")
     script.
         (function(w,d){
             //- expand console window

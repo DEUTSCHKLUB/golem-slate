@@ -106,28 +106,33 @@
 
         event.preventDefault();
         event.stopPropagation();
-        
-        fetch("/s/reset/" + slateid, {
-            method: 'GET',
-        }).then(res => {
-            const reader = res.body.getReader();
-            reader.read().then(function processText({ done, value }) {
-                let receivedText = new TextDecoder().decode(value);
 
-                let cleanedText = receivedText.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
-
-                slates.output.replaceRange(cleanedText, CodeMirror.Pos(slates.output.lastLine()));
-
-                slates.output.scrollTo(0, slates.output.getScrollInfo().height);
-                                    
-                if (done) {
-                    console.log("Reset complete");
-                    return;
-                }
-                return reader.read().then(processText);
+        var r = confirm("Are you sure you want to reset your slate?");
+        if (r == true) {
+            fetch("/s/reset/" + slateid, {
+                method: 'GET',
+            }).then(res => {
+                const reader = res.body.getReader();
+                reader.read().then(function processText({ done, value }) {
+                    let receivedText = new TextDecoder().decode(value);
+    
+                    let cleanedText = receivedText.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
+    
+                    slates.output.replaceRange(cleanedText, CodeMirror.Pos(slates.output.lastLine()));
+    
+                    slates.output.scrollTo(0, slates.output.getScrollInfo().height);
+                                        
+                    if (done) {
+                        console.log("Reset complete");
+                        return;
+                    }
+                    return reader.read().then(processText);
+                });
+            }).catch(err => {
+                console.log('Error outputting stream: ' + err);
             });
-        }).catch(err => {
-            console.log('Error outputting stream: ' + err);
-        });
+        } else {
+            return false;
+        }
     });
 })(window,document);
