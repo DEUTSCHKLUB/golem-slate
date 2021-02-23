@@ -20,8 +20,8 @@ You will need to build the provided Docker image so that it is available in your
 
 ## Set-Up ##
 * cd into the pens directory
-* Build the docker image:  
-    > docker build -t golem-slate Docker
+* Build a fresh docker image:  
+    > docker build --no-cache -t golem-slate Docker
 * Create 10 pens 
     > sudo ./create.sh
 * Start 10 pens 

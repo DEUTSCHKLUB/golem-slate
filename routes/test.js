@@ -47,8 +47,17 @@ function GetAvailablePenSlot() {
   return -1;
 }
 
-router.get('/instances', (req, res, next) => {
+router.get('/instances/:code', (req, res, next) => {
   try {
+    let password = req.params.code;
+
+    let checkPass = process.env.SLATE_PASS;
+
+    if(password != checkPass) {
+      next();
+      return;
+    }
+
     GetDockerCount((result) => {
       res.write("Docker instances:\n")
       let resultArray = result.split("\n");
