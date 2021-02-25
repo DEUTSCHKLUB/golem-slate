@@ -1,3 +1,18 @@
+.small-slate{
+    position: relative;
+    background-color: $one;
+    // linear-gradient(195deg, darken($one, 5%) 0%, $one 90%);
+    background-image: linear-gradient(90deg, rgba(darken($one, 5%),0.8), rgba(255,0,0,0) 80%),
+                linear-gradient(180deg, adjust-hue($one, 7deg), rgba(0,255,0,0) 70.71%),
+                linear-gradient(157deg, adjust-hue($five, -15deg), rgba(0,255,255,0) 50.71%),
+                linear-gradient(157deg, rgba($six,0.6), rgba(0,255,255,0) 60.71%),
+                linear-gradient(to top, rgba($two-dark, 0.5) 0%, rgba($two-dark, 0.3) 5%, rgba($one, 0) 100%);
+    border-bottom: 10px solid $one;
+    width: 90vw;
+    max-width: 360px;
+    padding: 1rem;
+    height: auto;  
+}
 #golem-slate-ui-wrap{
     position: relative;
     background-color: $one;
@@ -18,20 +33,6 @@
     margin: 5vh auto;
     padding:1rem 1.5rem;
     border-radius: .7rem;
-    &.small{
-        width: 90vw;
-        max-width:500px;
-        max-height: 60vh !important;
-        min-height: auto;
-        position: absolute;
-        top:40%;
-        left:50%;
-        transform: translate(-50%,-50%);
-        @media only screen and (min-width:1440px) {
-            max-height:50vh !important;
-            min-height:50vh !important;
-        }
-    }
     &:after{
         content: "";
         position: absolute;

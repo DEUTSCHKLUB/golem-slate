@@ -1,14 +1,16 @@
 extends layout
 
 block content
-  #golem-slate-ui-wrap.small
-    .container-fluid.px-4.py-4
-      .row.align-items-center.justify-content-center
-        .col-8.col-md-6
-          .logo.mb-3
-            img(src="/images/golem-slate-logo.svg")
-        .col-12(style="text-align:center")
-          h2 Access all the computing power you need
-          p golem SLATE is a code pen for creating work requests on the golem network - a decentralized computing platform.
-          a.btn.mt-3(href="/t/instances/create")
-            |Create a new SLATE
+  .d-flex.align-items-center.justify-content-center(style="width:100vw;height:100vh;")
+    .small-slate
+      .container-fluid.px-4.py-4
+        .row.align-items-center.justify-content-center
+          .col-8
+            .logo.mb-3
+              img(src="/images/golem-slate-logo.svg")
+          .col-12(style="text-align:center")
+            h2(style="line-height:1.5em;")
+              |Access all the computing power you need
+            p golem SLATE is a code pen for creating work requests on the golem network - a decentralized computing platform.
+            a.btn.mt-3(href="/t/instances/create")
+              |Create a new SLATE

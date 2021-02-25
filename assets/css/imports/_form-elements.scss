@@ -289,3 +289,29 @@ input:invalid, select:invalid{
       z-index:1071;
     }
 }
+
+@keyframes spin{
+  to{
+    transform: rotate(359deg);
+  }
+}
+
+.btn{
+  svg.play-icon{
+    display: block;
+  }
+  svg.loading-icon{
+    display: none;
+  }
+  &.yn-load-waiting{
+    svg.play-icon{
+      display: none;
+    }
+    svg.loading-icon{
+      display: block;
+      color:$six;
+      transform: rotate(0deg);
+      animation: spin 2s linear 0s infinite forwards;
+    }
+  }
+}

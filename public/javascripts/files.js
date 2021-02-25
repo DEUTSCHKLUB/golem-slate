@@ -72,19 +72,12 @@ function loadEditFile(){
     fetch(`/f/${slateid}/${fto}`, {
         method:'get',
     }).then(res => {
-        const contentType = res.headers.get("content-type");
-        if (contentType) {
-            return res;
-        } else {
-            return res.text().then(text => {
-                // this is text, do something with it
-                window.slates.code.setValue(text);
-                // lnk.parentNode.classList.add('open-in-editor');
-                createSaveButton(fto);
-            }).catch(function(error) {
-                console.log('Error',error);
-            });
-        }
+        return res.text().then(text => {
+            window.slates.code.setValue(text);
+            createSaveButton(fto);
+        }).catch(function(error) {
+            console.log('Error',error);
+        });
     });
 }
 

@@ -1,14 +1,16 @@
 extends layout
 
 block content
-  #golem-slate-ui-wrap.small
-    .container-fluid.px-4.py-4
-      .row.align-items-center.justify-content-center
-        .col-8.col-md-6
-          .logo.mb-3
-            img(src="/images/golem-slate-logo.svg")
-        .col-12(style="text-align:center")
-          h2 Oops. Something went wrong.
-          p Click below to return to safety.
-          a.btn.mt-3(href="/")
-            |Back to SLATE
+  .d-flex.align-items-center.justify-content-center(style="width:100vw;height:100vh;")
+    .small-slate
+      .container-fluid.px-4.py-4
+        .row.align-items-center.justify-content-center
+          //- .col-8
+          //-   .logo.mb-3
+          //-     img(src="/images/golem-slate-logo.svg")
+          .col-12(style="text-align:center")
+            h2.mt-0(style="line-height:1.5em;")
+              |Uh-Oh. Something went wrong.
+            p While we sort it out, click below to return to safety.
+            a.btn.mt-3(href="/")
+              |Back to SLATE

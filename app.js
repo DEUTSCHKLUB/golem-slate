@@ -17,6 +17,7 @@ let indexRouter = require('./routes/index');
 let slateRouter = require('./routes/slate');
 let filesRouter = require('./routes/files');
 let testRouter = require('./routes/test');
+let serviceRouter = require('./routes/service');
 
 
 var app = express();
@@ -52,6 +53,7 @@ app.use('/', indexRouter);
 app.use('/s', slateRouter);
 app.use('/f', filesRouter);
 app.use('/t', testRouter);
+app.use('/srv', serviceRouter);
 
 // catch 404 and forward to error handler
 // DJ - Is this necessary?
@@ -70,6 +72,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+global.yagnaStatus = "";
 
 global.maxPens = 10;
 

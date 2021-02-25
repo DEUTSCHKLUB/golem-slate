@@ -2987,6 +2987,16 @@ body {
 .open {
   display: block; }
 
+.small-slate {
+  position: relative;
+  background-color: #293241;
+  background-image: linear-gradient(90deg, rgba(31, 38, 49, 0.8), rgba(255, 0, 0, 0) 80%), linear-gradient(180deg, #292f41, rgba(0, 255, 0, 0) 70.71%), linear-gradient(157deg, #ee4d56, rgba(0, 255, 255, 0) 50.71%), linear-gradient(157deg, rgba(159, 204, 46, 0.6), rgba(0, 255, 255, 0) 60.71%), linear-gradient(to top, rgba(61, 90, 128, 0.5) 0%, rgba(61, 90, 128, 0.3) 5%, rgba(41, 50, 65, 0) 100%);
+  border-bottom: 10px solid #293241;
+  width: 90vw;
+  max-width: 360px;
+  padding: 1rem;
+  height: auto; }
+
 #golem-slate-ui-wrap {
   position: relative;
   background-color: #293241;
@@ -3002,19 +3012,6 @@ body {
   @media only screen and (min-width: 1440px) {
     #golem-slate-ui-wrap {
       height: 90vh; } }
-  #golem-slate-ui-wrap.small {
-    width: 90vw;
-    max-width: 500px;
-    max-height: 60vh !important;
-    min-height: auto;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%); }
-    @media only screen and (min-width: 1440px) {
-      #golem-slate-ui-wrap.small {
-        max-height: 50vh !important;
-        min-height: 50vh !important; } }
   #golem-slate-ui-wrap:after {
     content: "";
     position: absolute;
@@ -3549,6 +3546,25 @@ input:invalid, select:invalid {
     bottom: 1rem;
     right: 1rem;
     z-index: 1071; }
+
+@keyframes spin {
+  to {
+    transform: rotate(359deg); } }
+
+.btn svg.play-icon {
+  display: block; }
+
+.btn svg.loading-icon {
+  display: none; }
+
+.btn.yn-load-waiting svg.play-icon {
+  display: none; }
+
+.btn.yn-load-waiting svg.loading-icon {
+  display: block;
+  color: #9FCC2E;
+  transform: rotate(0deg);
+  animation: spin 2s linear 0s infinite forwards; }
 
 .cm-s-golem-slate.CodeMirror {
   background: transparent;

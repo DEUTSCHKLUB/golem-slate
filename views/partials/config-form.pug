@@ -50,15 +50,17 @@
 					|crtcfyhuinuio
 
 		.form-group.no-border
-			button(type="submit" value="Run" id="submitPen" class="btn" title='Run Slate')
-				svg.bi(width='16' height='16' fill='currentColor')
+			button(type="submit" value="Run" id="submitPen" class="btn yn-load-waiting" title='Run Slate' disabled="disabled")
+				svg.bi(width='16' height='16' fill='currentColor' class="play-icon")
 					use(xlink:href='/icons.svg#play-fill')
+				svg.bi(width='16' height='16' fill='currentColor' class="loading-icon")
+					use(xlink:href='/icons.svg#arrow-clockwise')
 				//- |Run
 			button.red(value="Stop" id="stopPen" class="btn" title='Stop Slate' disabled="disabled")
 				svg.bi(width='16' height='16' fill='currentColor')
 					use(xlink:href='/icons.svg#stop-fill')
 				//- |Stop
-			button(value="Reset" id="resetPen" class="btn" title='Reset Slate')
+			button(value="Reset" id="resetPen" class="btn" title='Reset Slate' disabled="disabled")
 				svg.bi(width='16' height='16' fill='currentColor')
 					use(xlink:href='/icons.svg#bootstrap-reboot')
 				//- |Reset
