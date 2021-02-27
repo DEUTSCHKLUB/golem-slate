@@ -2,7 +2,7 @@ const express = require('express'),
       fs = require('fs'),
       path = require('path'),
       fileDir = './pens/pen1/',
-      { spawn, exec, execFile } = require('child_process'),
+      { spawn, exec, execSync, execFile } = require('child_process'),
       shortid = require('shortid'),
       router = express.Router();
 
@@ -42,8 +42,28 @@ function GetAvailablePenSlot() {
   for (let index = 0; index < global.maxPens; index++) {
     if (global.penSlots[index] == "") {
       return index;
+    } else if(global.penExpires[index] != undefined) {
+      let expiresAt = global.penExpires[index];
+      let currentTime = Date.now();
+      console.log(`Pen ${index} expires ${expiresAt} and it is ${currentTime}`);
+      if (global.penExpires[index] < currentTime) { // If it has expired
+        // Now we need to clear out the pen and return the number
+        console.log(`clearing slot ${index}`);
+
+        // Don't need to show the output while resetting
+        execSync(`./pens/resetPen.sh pen${index}`);
+
+        return index;
+      } else {
+        console.log(`Can't use slot ${index}`);
+      }
     }
   }
+
+  // If we got here then it means we have no available slots so we can try to clear one up
+
+
+
   return -1;
 }
 
@@ -68,9 +88,10 @@ router.get('/instances/:code', (req, res, next) => {
       } else {
         res.write('You may have a new pen\n');
       }
+      res.write(`\nCurrent Time: ${Date.now()}\n`);
       res.write('\nPen status:\n');
       for (let index = 0; index < global.maxPens; index++) {
-        res.write(`Slot ${index} = ${global.penSlots[index]}\n`);
+        res.write(`Slot ${index} = ${global.penSlots[index]}\t${global.penExpires[index]}\n`);
       }
       
       res.end();
@@ -84,20 +105,22 @@ router.get('/instances/:code', (req, res, next) => {
 
 router.get('/instances/create', (req, res, next) => {
   try {
-    let openSlot = GetAvailablePenSlot();
-    console.log("Received open slot: " + openSlot);
     
-    if (openSlot == -1) {
-      res.write("No pens available! Sorry, Charlie!");
-      res.end();
-    } else {
-      let newPenId = shortid.generate();
-      // Store both dictionaries so we can look it up either way
-      global.penSlots[openSlot] = newPenId;
-      global.penHashes[newPenId] = openSlot;
-
-      res.redirect(`/s/${newPenId}`);
-    }
+      let openSlot = GetAvailablePenSlot();
+      console.log("Received open slot: " + openSlot);
+    
+      if (openSlot == -1) {
+        res.write("No pens available! Sorry, Charlie!");
+        res.end();
+      } else {
+        let newPenId = shortid.generate();
+        // Store both dictionaries so we can look it up either way
+        global.penSlots[openSlot] = newPenId;
+        global.penHashes[newPenId] = openSlot;
+        global.penExpires[openSlot] = Date.now() + 30 * 60 * 1000; // Timeout after 3 minutes
+  
+        res.redirect(`/s/${newPenId}`);
+      };
 
     /*
     GetDockerCount((result) => {

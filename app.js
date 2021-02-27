@@ -79,9 +79,11 @@ global.maxPens = 10;
 
 global.penSlots = {};
 global.penHashes = {};
+global.penExpires = {};
 
 for (let index = 0; index < global.maxPens; index++) {
   global.penSlots[index] = "";
+  global.penExpires[index] = undefined;
 }
 
 module.exports = app;
