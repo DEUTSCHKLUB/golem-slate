@@ -44,7 +44,10 @@ router.post('/run/:slateid', (req, res, next) => {
     res.setHeader("Content-Type", "text/event-stream");
     let { cpuSelect, ramSelect, discSelect, imageSelect } = req.body;
 
+    // Refresh expiry
     let slateid = req.params.slateid;
+    global.penExpires[global.penHashes[slateid]] = Date.now() + global.penDuration * 60 * 1000; //global.penDuration
+
     console.log(`Current slate ID: ${slateid}`);
     
     let penSlot = global.penHashes[slateid];

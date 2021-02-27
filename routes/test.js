@@ -91,7 +91,7 @@ router.get('/instances/:code', (req, res, next) => {
       res.write(`\nCurrent Time: ${Date.now()}\n`);
       res.write('\nPen status:\n');
       for (let index = 0; index < global.maxPens; index++) {
-        res.write(`Slot ${index} = ${global.penSlots[index]}\t${global.penExpires[index]}\n`);
+        res.write(`Slot ${index} = ${global.penSlots[index]}\t${global.penExpires[index]}\tRemaining minutes: ${(global.penExpires[index]-Date.now())/60/1000}\n`);
       }
       
       res.end();
@@ -110,14 +110,14 @@ router.get('/instances/create', (req, res, next) => {
       console.log("Received open slot: " + openSlot);
     
       if (openSlot == -1) {
-        res.write("No pens available! Sorry, Charlie!");
+        res.write("No pens available! Sorry, Charlie! Try again later.");
         res.end();
       } else {
         let newPenId = shortid.generate();
         // Store both dictionaries so we can look it up either way
         global.penSlots[openSlot] = newPenId;
         global.penHashes[newPenId] = openSlot;
-        global.penExpires[openSlot] = Date.now() + 30 * 60 * 1000; // Timeout after 3 minutes
+        global.penExpires[openSlot] = Date.now() + global.penDuration * 60 * 1000; // Timeout after global.penDuration
   
         res.redirect(`/s/${newPenId}`);
       };

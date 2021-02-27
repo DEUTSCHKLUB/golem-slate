@@ -124,7 +124,11 @@ router.get("/:slateid/image/:file", async function(req, res, next) {
 
 /* SAVE FILE FROM EDITOR ENDPOINT */
 
-router.post("/:slateid/save", function(req, res) {    
+router.post("/:slateid/save", function(req, res) {   
+    // Refresh expiry on saving
+    let slateid = req.params.slateid;
+    global.penExpires[global.penHashes[slateid]] = Date.now() + global.penDuration * 60 * 1000; // global.penDuration
+
     let f = req.body.file,
         p = path.join(GetFilePath(req), f),
         content = req.body.content,
