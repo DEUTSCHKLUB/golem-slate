@@ -10,5 +10,6 @@ diskFile=$1.img
 diskDir=$1
 # Stop the docker image
 ./stopPen.sh $1
+sleep 3
 # Start the docker again
 ./startPen.sh $1
