@@ -26,7 +26,8 @@ You will need to build the provided Docker image so that it is available in your
     > sudo ./create.sh
 * Start 10 pens 
     > for t in {0..9}; do ./startPen.sh pen$t; done
-* Run the front-end web application
+* Run the front-end web application from the parent folder
+    > npm run start
 
 ## Tear-down ##
 * cd into the pens directory
