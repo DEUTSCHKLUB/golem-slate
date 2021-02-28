@@ -56,36 +56,38 @@ function saveFile(){
 }
 
 function createSaveButton(fileToSave){
-    let a = document.createElement("a");
-        a.textContent = 'Save File';
-        a.className = 'btn save-link';
-        a.onclick = saveFile;
-        a.setAttribute('href', '#');
-        a.setAttribute('data-target', `${fileToSave}`);
-        document.querySelector('#editor-container').appendChild(a);
+    if (!/\.log$/i.test(fileToSave)){
+        let a = document.createElement("a");
+            a.textContent = 'Save File';
+            a.className = 'btn save-link';
+            a.onclick = saveFile;
+            a.setAttribute('href', '#');
+            a.setAttribute('data-target', `${fileToSave}`);
+            document.querySelector('#editor-container').appendChild(a);
+    }
 }
 
 function loadEditFile(){
-    console.log("loading edit file");
     event.preventDefault();
+    // remove open class
+    [...document.querySelectorAll('.file-link')].map((el) => { el.parentNode.classList.remove('open-in-editor') });
     let lnk = event.target,
-        fto = event.target.dataset.target;
+        fto = event.target.dataset.target,
+        currLink = document.querySelector('.save-link');
+        if(currLink){
+            currLink.remove();
+        }
+
     fetch(`/f/${slateid}/${fto}`, {
         method:'get',
     }).then(res => {
-        const contentType = res.headers.get("content-type");
-        //if (contentType) {
-        //    return res;
-        //} else {
-            return res.text().then(text => {
-                // this is text, do something with it
-                window.slates.code.setValue(text);
-                // lnk.parentNode.classList.add('open-in-editor');
-                createSaveButton(fto);
-            }).catch(function(error) {
-                console.log('Error',error);
-            });
-        //}
+        return res.text().then(text => {
+            window.slates.code.setValue(text);
+            createSaveButton(fto);
+            lnk.parentNode.classList.add("open-in-editor");
+        }).catch(function(error) {
+            console.log('Error',error);
+        });
     });
 }
 

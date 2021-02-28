@@ -3231,13 +3231,16 @@ body {
         .filelist-wrapper ul li.open-in-editor:hover {
           color: #E0FBFC; }
         .filelist-wrapper ul li.open-in-editor:after {
-          content: ">";
+          content: "\25BC";
           position: absolute;
           top: 50%;
           right: 10px;
           font-size: 1rem;
           line-height: 1em;
           transform: translate(0, -50%); }
+          @media only screen and (min-width: 1440px) {
+            .filelist-wrapper ul li.open-in-editor:after {
+              content: ">"; } }
 
 .drop-label {
   display: block;

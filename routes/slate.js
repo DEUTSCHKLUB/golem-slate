@@ -64,6 +64,7 @@ router.post('/run/:slateid', (req, res, next) => {
     runner.stderr.pipe(res, { end: false });
     runner.on('close', (code, signal) => {
       console.log(`child process exited with code ${code} and signal ${signal}`);
+      res.end();
     });
   } catch (err) {
     console.log(err);
@@ -94,6 +95,7 @@ router.get('/stop/:slateid', (req, res, next) => {
     runner.stderr.pipe(res, { end: false });
     runner.on('close', (code, signal) => {
       console.log(`child process exited with code ${code} and signal ${signal}`);
+      res.end();
     });
   } catch (err) {
     console.log(err);
@@ -124,6 +126,7 @@ router.get('/reset/:slateid', (req, res, next) => {
     runner.stderr.pipe(res, { end: false });
     runner.on('close', (code, signal) => {
       console.log(`child process exited with code ${code} and signal ${signal}`);
+      res.end();
     });
   } catch (err) {
     console.log(err);

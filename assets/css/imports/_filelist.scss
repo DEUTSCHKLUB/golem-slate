@@ -48,13 +48,16 @@ $active-file-color:lighten($five, 2%);
                     color:$four;
                 }
                 &:after{
-                    content:">";
+                    content:"\25BC";
                     position: absolute;
                     top:50%;
                     right:10px;
                     font-size:1rem;
                     line-height:1em;
                     transform:translate(0,-50%);
+                    @media only screen and (min-width:1440px) {
+                        content: ">";
+                    }
                 }
             }
         }
