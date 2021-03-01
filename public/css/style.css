@@ -3143,7 +3143,7 @@ body {
         #golem-slate-ui-wrap #golem-slate-container #golem-slate-output {
           border-top: none;
           border-left: 1px solid #537aad;
-          max-width: 25%; } }
+          max-width: 20%; } }
 
 .notify {
   position: absolute;
@@ -3557,17 +3557,23 @@ input:invalid, select:invalid {
 .btn svg.play-icon {
   display: block; }
 
-.btn svg.loading-icon {
+.btn svg.loading-icon, .btn .loading-text {
   display: none; }
 
 .btn.yn-load-waiting svg.play-icon {
   display: none; }
 
 .btn.yn-load-waiting svg.loading-icon {
-  display: block;
+  display: inline-block;
   color: #9FCC2E;
   transform: rotate(0deg);
   animation: spin 2s linear 0s infinite forwards; }
+
+.btn.yn-load-waiting .loading-text {
+  display: inline-block;
+  color: #9FCC2E;
+  white-space: nowrap;
+  margin-left: 5px; }
 
 .cm-s-golem-slate.CodeMirror {
   background: transparent;
@@ -3775,5 +3781,8 @@ input:invalid, select:invalid {
 .cm-s-golem-slate-console .CodeMirror-matchingbracket {
   outline: 1px solid grey;
   color: white !important; }
+
+.CodeMirror-wrap pre {
+  word-break: break-word !important; }
 
 /*# sourceMappingURL=style.css.map */

@@ -7,7 +7,7 @@ const createError = require('http-errors'),
       bodyParser = require('body-parser'),
       cors = require('cors'),
       favicon = require('serve-favicon'),
-      Observer = require('./services/observe'),
+      // Observer = require('./services/observe'),
       srcPath = __dirname + '/assets/',
       destPath = __dirname + '/public/';
 
@@ -17,7 +17,7 @@ let indexRouter = require('./routes/index');
 let slateRouter = require('./routes/slate');
 let filesRouter = require('./routes/files');
 let testRouter = require('./routes/test');
-let serviceRouter = require('./routes/service');
+// let serviceRouter = require('./routes/service');
 
 
 var app = express();
@@ -53,7 +53,7 @@ app.use('/', indexRouter);
 app.use('/s', slateRouter);
 app.use('/f', filesRouter);
 app.use('/t', testRouter);
-app.use('/srv', serviceRouter);
+// app.use('/srv', serviceRouter);
 
 // catch 404 and forward to error handler
 // DJ - Is this necessary?

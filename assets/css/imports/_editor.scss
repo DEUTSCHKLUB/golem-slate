@@ -79,3 +79,6 @@
 .cm-s-golem-slate-console .CodeMirror-activeline-background { background: #013461; }
 .cm-s-golem-slate-console .CodeMirror-matchingbracket { outline:1px solid grey; color:white !important; }
 
+.CodeMirror-wrap pre {
+  word-break: break-word !important;
+}

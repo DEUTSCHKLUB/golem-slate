@@ -7,6 +7,13 @@
 
     // console.log(slateid);
 
+    function btnUIChange(changes){
+        let {run,stop,res} = changes;
+        !!run ? runBTN.removeAttribute("disabled") : runBTN.setAttribute('disabled','disabled');
+        !!stop ? stopBTN.removeAttribute("disabled") : stopBTN.setAttribute('disabled','disabled');
+        !!res ? resetBTN.removeAttribute("disabled") : resetBTN.setAttribute('disabled','disabled');
+    }
+
     //- VALIDATION MESSAGE
 
     let img = d.querySelector("input#imageSelect");
@@ -31,8 +38,7 @@
         event.preventDefault();
 
         // toggle disabled
-        stopBTN.removeAttribute("disabled");
-        runBTN.setAttribute('disabled','disabled');
+        btnUIChange({run:0,stop:1,res:0});
 
         // Store reference to form to make later code easier to read
         const form = event.target;	
@@ -53,9 +59,8 @@
                 slates.output.scrollTo(0, slates.output.getScrollInfo().height);
                                     
                 if (done) {
-                    console.log("Stream complete");
-                    stopBTN.removeAttribute("disabled");
-                    runBTN.setAttribute('disabled','disabled');
+                    // console.log("Stream complete");
+                    btnUIChange({run:1,stop:0,res:1});
                     return;
                 }
                 return reader.read().then(processText);
@@ -73,8 +78,7 @@
         event.stopPropagation();
 
         // toggle disabled
-        stopBTN.setAttribute('disabled','disabled');
-        runBTN.removeAttribute("disabled");
+        btnUIChange({run:0,stop:0,res:0});
         
         fetch("/s/stop/" + slateid, {
             method: 'GET',
@@ -90,7 +94,8 @@
                 slates.output.scrollTo(0, slates.output.getScrollInfo().height);
                                     
                 if (done) {
-                    console.log("Stop complete");
+                    // console.log("Stop complete");
+                    btnUIChange({run:1,stop:0,res:1});
                     return;
                 }
                 return reader.read().then(processText);
@@ -106,6 +111,8 @@
 
         event.preventDefault();
         event.stopPropagation();
+
+        btnUIChange({run:0,stop:0,res:0});
 
         var r = confirm("Are you sure you want to reset your slate?");
         if (r == true) {
@@ -123,7 +130,8 @@
                     slates.output.scrollTo(0, slates.output.getScrollInfo().height);
                                         
                     if (done) {
-                        console.log("Reset complete");
+                        // console.log("Reset complete");
+                        btnUIChange({run:1,stop:0,res:1});
                         return;
                     }
                     return reader.read().then(processText);

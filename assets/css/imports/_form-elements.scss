@@ -300,7 +300,7 @@ input:invalid, select:invalid{
   svg.play-icon{
     display: block;
   }
-  svg.loading-icon{
+  svg.loading-icon, .loading-text{
     display: none;
   }
   &.yn-load-waiting{
@@ -308,10 +308,16 @@ input:invalid, select:invalid{
       display: none;
     }
     svg.loading-icon{
-      display: block;
+      display: inline-block;
       color:$six;
       transform: rotate(0deg);
       animation: spin 2s linear 0s infinite forwards;
+    }
+    .loading-text{
+      display: inline-block;
+      color: $six;
+      white-space: nowrap;
+      margin-left:5px;
     }
   }
 }
