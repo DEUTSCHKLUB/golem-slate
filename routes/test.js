@@ -38,7 +38,7 @@ function GetDockerCount(callbacksSuck) {
 }
 
 // Returns the 0-based slot number of an available pen, or -1 if no pen slots are available
-function GetAvailablePenSlot() {
+async function GetAvailablePenSlot() {
   for (let index = 0; index < global.maxPens; index++) {
     if (global.penSlots[index] == "") {
       return index;
@@ -51,7 +51,7 @@ function GetAvailablePenSlot() {
         console.log(`clearing slot ${index}`);
 
         // Don't need to show the output while resetting
-        execSync(`./pens/resetPen.sh pen${index}`);
+        await exec(`./pens/resetPen.sh pen${index}`);
 
         return index;
       } else {
@@ -103,10 +103,10 @@ router.get('/instances/:code', (req, res, next) => {
     
 });
 
-router.get('/instances/create', (req, res, next) => {
+router.get('/instances/create', async function(req, res, next) {
   try {
     
-      let openSlot = GetAvailablePenSlot();
+      let openSlot = await GetAvailablePenSlot();
       console.log("Received open slot: " + openSlot);
     
       if (openSlot == -1) {
