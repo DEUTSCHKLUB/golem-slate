@@ -51,7 +51,7 @@ async function GetAvailablePenSlot() {
         console.log(`clearing slot ${index}`);
 
         // Don't need to show the output while resetting
-        await exec(`./pens/resetPen.sh pen${index}`);
+        execSync(`./pens/resetPen.sh pen${index}`);
 
         return index;
       } else {
@@ -121,27 +121,10 @@ router.get('/instances/create', async function(req, res, next) {
   
         res.redirect(`/s/${newPenId}`);
       };
-
-    /*
-    GetDockerCount((result) => {
-      let resultArray = result.split("\n");
-      res.write(result);
-      // This count is off by 1. when I have 2 running it says 3?
-      res.write(`${resultArray.length}/${global.maxPens} pens in use`);
-      if(resultArray.length >= global.maxPens) {
-        res.write('There are too many pens already!');
-      } else {
-        res.write('You may have a new pen');
-      }
-      
-      res.end();
-    });
-    */
   } catch (err) {
     console.log(err);
     next(err);
   }
-    
 });
 
 module.exports = router;
