@@ -39,6 +39,7 @@
 
         // toggle disabled
         btnUIChange({run:0,stop:1,res:0});
+        let watchFiles = setInterval(refreshTree, 5000);
 
         // Store reference to form to make later code easier to read
         const form = event.target;	
@@ -61,6 +62,7 @@
                 if (done) {
                     // console.log("Stream complete");
                     btnUIChange({run:1,stop:0,res:1});
+                    clearInterval(watchFiles);
                     return;
                 }
                 return reader.read().then(processText);
@@ -79,6 +81,7 @@
 
         // toggle disabled
         btnUIChange({run:0,stop:0,res:0});
+        let watchFiles = setInterval(refreshTree, 5000);
         
         fetch("/s/stop/" + slateid, {
             method: 'GET',
@@ -96,6 +99,7 @@
                 if (done) {
                     // console.log("Stop complete");
                     btnUIChange({run:1,stop:0,res:1});
+                    clearInterval(watchFiles);
                     return;
                 }
                 return reader.read().then(processText);
@@ -113,6 +117,7 @@
         event.stopPropagation();
 
         btnUIChange({run:0,stop:0,res:0});
+        let watchFiles = setInterval(refreshTree, 5000);
 
         var r = confirm("Are you sure you want to reset your slate?");
         if (r == true) {
@@ -132,6 +137,7 @@
                     if (done) {
                         // console.log("Reset complete");
                         btnUIChange({run:1,stop:0,res:1});
+                        clearInterval(watchFiles);
                         return;
                     }
                     return reader.read().then(processText);
