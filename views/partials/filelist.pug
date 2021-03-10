@@ -1,4 +1,8 @@
 //- html
+a.mb-2(href="https://youtu.be/P7bNvsRU7P0" target="_blank")
+    svg.bi.mr-3(width='22' height='22' fill='currentColor' style="vertical-align:middle")
+        use(xlink:href='/icons.svg#play-btn')
+    |Watch SLATE Demo Video
 
 h4.text-five.column-title Files:
 
@@ -10,11 +14,6 @@ label#file-upload-label.drop-label(for='file-upload-field')
     br
     |     Click or Drop Files Here
     input#file-upload-field(type='file' name='uploads[]' multiple='multiple')
-//- .refresh-wrap
-//-     a#refresh-files-btn.text-five.d-inline-flex.align-items-center(href="#")
-//-         svg.bi.mr-2(width='22' height='22' fill='currentColor')
-//-             use(xlink:href='/icons.svg#arrow-clockwise')
-//-         | Refresh File List
 .filelist-wrapper
 
 //- JS
