@@ -13,9 +13,9 @@ RUN npm i -g yarn
 # RUN touch $HOME/.local/share/ya-installer/terms/testnet-01.tag
 # RUN curl -sSf https://join.golem.network/as-requestor | bash - || echo "Nothing to see here"
 # ENV PATH=${PATH}:/root/.local/bin/:/root/.local/
-RUN wget https://github.com/golemfactory/yagna/releases/download/pre-rel-v0.6.1-rc3/golem-requestor-linux-pre-rel-v0.6.1-rc3.tar.gz
-RUN tar -xf golem-requestor-linux-pre-rel-v0.6.1-rc3.tar.gz
-RUN cp golem-requestor-linux-pre-rel-v0.6.1-rc3/* /usr/sbin/
+RUN wget https://github.com/golemfactory/yagna/releases/download/v0.6.1/golem-requestor-linux-v0.6.1.tar.gz
+RUN tar -xf golem-requestor-linux-v0.6.1.tar.gz
+RUN cp golem-requestor-linux-v0.6.1/* /usr/sbin/
 WORKDIR /golem/work
 # Start up in background and keep running
 # docker run -d -it --name=diska --rm -v ${PWD}:/golem/work golem-slate tail -f /dev/null

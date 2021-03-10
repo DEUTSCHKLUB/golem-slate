@@ -8,4 +8,4 @@ fi
 cd $(dirname $0)
 diskFile=$1.img
 diskDir=$1
-docker kill $diskDir
+docker rm -f $diskDir

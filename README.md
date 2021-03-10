@@ -35,7 +35,7 @@ The output area will show the progress of running the request. Any files downloa
 ### Back-end Setup ###
 * cd into the pens directory
 * Build the docker image:  
-    > docker build -t golem-slate Docker
+    > docker build --no-cache -t golem-slate Docker
 * Create 10 pens 
     > ./create.sh
 * Start 10 pens 

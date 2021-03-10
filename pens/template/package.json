@@ -14,7 +14,7 @@
         "dayjs": "^1.8.31",
         "ts-node": "^9.0.0",
         "tsc": "^1.20150623.0",
-        "yajsapi": "^0.3.0",
+        "yajsapi": "^0.3.1",
         "yarn": "^1.22.10"
     },
     "devDependencies": {
