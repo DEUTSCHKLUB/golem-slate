@@ -39,7 +39,8 @@
 
         // toggle disabled
         btnUIChange({run:0,stop:1,res:0});
-        let watchFiles = setInterval(refreshTree, 5000);
+        refreshTree(); // Refresh immediately then set timer;
+        // let watchFiles = setInterval(refreshTree, 3000);
 
         // Store reference to form to make later code easier to read
         const form = event.target;	
@@ -62,7 +63,9 @@
                 if (done) {
                     // console.log("Stream complete");
                     btnUIChange({run:1,stop:0,res:1});
-                    clearInterval(watchFiles);
+                    // clearInterval(watchFiles);
+                    //Refresh one last time
+                    refreshTree();
                     return;
                 }
                 return reader.read().then(processText);
@@ -81,7 +84,8 @@
 
         // toggle disabled
         btnUIChange({run:0,stop:0,res:0});
-        let watchFiles = setInterval(refreshTree, 5000);
+        refreshTree(); // Refresh immediately then set timer;
+        // let watchFiles = setInterval(refreshTree, 3000);
         
         fetch("/s/stop/" + slateid, {
             method: 'GET',
@@ -99,7 +103,9 @@
                 if (done) {
                     // console.log("Stop complete");
                     btnUIChange({run:1,stop:0,res:1});
-                    clearInterval(watchFiles);
+                    // clearInterval(watchFiles);
+                    // Refresh one last time
+                    refreshTree();
                     return;
                 }
                 return reader.read().then(processText);
@@ -117,7 +123,7 @@
         event.stopPropagation();
 
         btnUIChange({run:0,stop:0,res:0});
-        let watchFiles = setInterval(refreshTree, 5000);
+        refreshTree(); // Refresh immediately then again when it's done
 
         var r = confirm("Are you sure you want to reset your slate?");
         if (r == true) {
@@ -137,7 +143,11 @@
                     if (done) {
                         // console.log("Reset complete");
                         btnUIChange({run:1,stop:0,res:1});
-                        clearInterval(watchFiles);
+                        refreshTree();
+                        // Refresh again after 5 seconds for the startup file:
+                        setTimeout(() => {
+                            refreshTree();
+                        }, 5000);
                         return;
                     }
                     return reader.read().then(processText);

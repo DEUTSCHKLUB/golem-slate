@@ -192,7 +192,7 @@ function refreshTree(){
     });
 }
 
-// document.querySelector('a#refresh-files-btn').addEventListener('click', refreshTree);
+document.querySelector('a#refresh-files-btn').addEventListener('click', refreshTree);
 
 // BUILD INITIAL FILE LIST
 

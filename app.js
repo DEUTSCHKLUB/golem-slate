@@ -80,7 +80,7 @@ global.maxPens = 10;
 global.penSlots = {};
 global.penHashes = {};
 global.penExpires = {};
-global.penDuration = 1;
+global.penDuration = 30;
 
 for (let index = 0; index < global.maxPens; index++) {
   global.penSlots[index] = "";
