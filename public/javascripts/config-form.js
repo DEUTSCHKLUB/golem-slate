@@ -40,7 +40,7 @@
         // toggle disabled
         btnUIChange({run:0,stop:1,res:0});
         refreshTree(); // Refresh immediately then set timer;
-        // let watchFiles = setInterval(refreshTree, 3000);
+        let watchFiles = setInterval(refreshTree, 3000);
 
         // Store reference to form to make later code easier to read
         const form = event.target;	
@@ -63,7 +63,7 @@
                 if (done) {
                     // console.log("Stream complete");
                     btnUIChange({run:1,stop:0,res:1});
-                    // clearInterval(watchFiles);
+                    clearInterval(watchFiles);
                     //Refresh one last time
                     refreshTree();
                     return;
@@ -85,7 +85,7 @@
         // toggle disabled
         btnUIChange({run:0,stop:0,res:0});
         refreshTree(); // Refresh immediately then set timer;
-        // let watchFiles = setInterval(refreshTree, 3000);
+        let watchFiles = setInterval(refreshTree, 3000);
         
         fetch("/s/stop/" + slateid, {
             method: 'GET',
@@ -103,7 +103,7 @@
                 if (done) {
                     // console.log("Stop complete");
                     btnUIChange({run:1,stop:0,res:1});
-                    // clearInterval(watchFiles);
+                    clearInterval(watchFiles);
                     // Refresh one last time
                     refreshTree();
                     return;
